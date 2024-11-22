@@ -1,6 +1,69 @@
-# Getting Started with Create React App
+# Digital Exam System (DES)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The **Digital Exam System (DES)** is a robust, easy-to-use platform designed to help schools transition from traditional paper-based examinations to secure, efficient online assessments. As the world of education evolves, external examination bodies are phasing out paper exams in favor of digital solutions. DES empowers schools to stay ahead by simplifying the process of setting, conducting, and grading exams for their students.
+
+---
+
+## Key Features
+
+1. **Seamless Exam Management:**
+
+    - Easily set, conduct, and grade exams with intuitive tools.
+    - Built with simplicity in mind—no distracting designs, just a creative and functional interface.
+
+2. **Maximum Security:**
+
+    - Secure exam environments are ensured using integration with **Safe Exam Browsers**.
+    - Prevent unauthorized access or exam malpractice with cutting-edge security features.
+
+3. **Flexible Deployment Options:**
+
+    - Compatible with school online servers, cloud setups, or local servers.
+    - Quick and easy setup on Linux servers with a single command.
+
+4. **Built for Scalability and Performance:**
+    - Developed using **React (migrating to Next.js)** for a seamless user interface.
+    - Powered by **Django** and **MySQL** for robust backend performance.
+
+---
+
+## Installation
+
+1. **Prerequisites:**
+
+    - A Linux server with required dependencies installed.
+
+2. **Quick Setup Command:**  
+   Run the following command to set up DES on your Linux server:
+
+    ```bash
+    ./setup-digital-exam-system.sh
+    ```
+
+3. **Integration with Safe Exam Browsers:**
+
+    - Ensure Safe Exam Browser is configured for the best experience.
+
+4. **Database Configuration:**
+    - DES requires MySQL for database management. Follow the setup guide to configure your database connection.
+
+---
+
+## Upcoming Improvements
+
+-   Migration of the frontend framework from React to **Next.js** for enhanced performance and SEO.
+
+---
+
+## Contact
+
+For inquiries or support, please contact:  
+**Email:** [aderemijoseph@live.com](mailto:aderemijoseph@live.com)  
+**Phone:** +2348090964567
+
+---
+
+We are dedicated to helping schools embrace the future of digital examinations with ease and confidence. **Digital Exam System**—your partner in transitioning to online assessments!
 
 ## Available Scripts
 
