@@ -1,4 +1,4 @@
-import './App.css';
+import '../App.css';
 import Question from '../components/question';
 import Options from '../components/options';
 import { useEffect, useState } from 'react';

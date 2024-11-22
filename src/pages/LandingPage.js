@@ -2,7 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import SignUpForm from "../components/SignUpForm";
 
-import './global.css';
+import '../global.css';
 
 
 
