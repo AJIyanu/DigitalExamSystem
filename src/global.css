@@ -1,6 +1,5 @@
 .setborder {
     border: 2px solid black;
-    height: 100vh;
 }
 
 .pageheight {
@@ -19,4 +18,9 @@
 
 .white-bg {
     background-color: rgba(242, 233, 221, 0.923);
+}
+
+.icon-font {
+    font-size: 2rem;
+    color: rgb(91, 0, 0);
 }
