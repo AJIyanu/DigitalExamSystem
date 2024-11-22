@@ -1,0 +1,22 @@
+.setborder {
+    border: 2px solid black;
+    height: 100vh;
+}
+
+.pageheight {
+    height: 100vh;
+}
+
+.primary-bg-color {
+    background-color: rgba(243, 178, 165, 0.953);
+}
+
+.bg-img {
+    background-image: url(../public/img/randommaterials.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.white-bg {
+    background-color: rgba(242, 233, 221, 0.923);
+}
