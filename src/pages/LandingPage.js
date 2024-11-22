@@ -30,11 +30,21 @@ function LandingPage() {
                         className="mx-auto"
                         alt="cbtonlinetest"
                     />
-                    <h1>Exam Mastery Hub</h1>
-                    <h6>subtitle goes here</h6>
+                    <h1>My Exam, My Confidence</h1>
+                    <h5>
+                        made in simplicity, totally secured, you are not
+                        stressed!
+                    </h5>
+                    <hr style={{ width: '50%', marginTop: '80px' }} />
+                    <p>
+                        <i>
+                            ...Revolutionize Your Exam Process with Digital
+                            Efficiency
+                        </i>
+                    </p>
                 </Col>
                 <Col className={`d-flex ${vertHorCntr} white-bg`}>
-                    <h3 className="mb-5">Sign up Exam Success</h3>
+                    <h2 className="mb-5">Digital Exam System</h2>
                     {signup ? (
                         <SignUpForm onFormChange={handleSigningFormChange} />
                     ) : (

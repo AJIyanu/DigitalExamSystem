@@ -86,31 +86,43 @@ function Exam() {
                 </p>
                 <hr />
                 <Question>{emptyQuestions[questionNumber].Question}</Question>
-                <Options
-                    optionsArray={emptyQuestions[questionNumber].otherOptions}
-                    questionId={[
-                        emptyQuestions[questionNumber].id,
-                        emptyQuestions[questionNumber].selectedOption,
-                    ]}
-                    cllbck={setUserSelectedOption}
-                />
+                <div className="ms-5 mb-5">
+                    <Options
+                        optionsArray={
+                            emptyQuestions[questionNumber].otherOptions
+                        }
+                        questionId={[
+                            emptyQuestions[questionNumber].id,
+                            emptyQuestions[questionNumber].selectedOption,
+                        ]}
+                        cllbck={setUserSelectedOption}
+                    />
+                </div>
+                <div>
+                    <Row>
+                        <Col xs={2}>
+                            <div className="d-grid">
+                                <Button
+                                    onClick={handlePrevButton}
+                                    variant="warning"
+                                >
+                                    Prev
+                                </Button>
+                            </div>
+                        </Col>
+                        <Col xs={2}>
+                            <div className="d-grid">
+                                <Button
+                                    onClick={handleNextButton}
+                                    variant="info"
+                                >
+                                    Next
+                                </Button>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
             </div>
-            <Row>
-                <Col xs={2}>
-                    <div className="d-grid">
-                        <Button onClick={handlePrevButton} variant="warning">
-                            Prev
-                        </Button>
-                    </div>
-                </Col>
-                <Col xs={2}>
-                    <div className="d-grid">
-                        <Button onClick={handleNextButton} variant="info">
-                            Next
-                        </Button>
-                    </div>
-                </Col>
-            </Row>
         </>
     );
 }

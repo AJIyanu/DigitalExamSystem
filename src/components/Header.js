@@ -1,11 +1,13 @@
-import { Stack, Image } from 'react-bootstrap';
+import { Stack, NavLink } from 'react-bootstrap';
 
 import '../global.css';
 
 function Header() {
     return (
         <Stack direction="horizontal" gap={4} className="primary-bg-color">
-            <h3 className="m-4">AJ CBT</h3>
+            <NavLink href="/">
+                <h3 className="m-4">AJ Digital Exam System</h3>
+            </NavLink>
             <i className="bi bi-bell-fill ms-auto icon-font"></i>
             {/* <Image
                 roundedCircle

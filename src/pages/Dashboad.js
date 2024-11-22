@@ -25,7 +25,7 @@ function UserDashboard() {
                     </Col>
                     <Col className="white-bg rounded m-1 mt-2">
                         <Routes>
-                            <Route path="/" element={<QuestionPage />} />
+                            {/* <Route path="" element={<QuestionPage />} /> */}
                             <Route
                                 path="/questions"
                                 element={<QuestionPage />}

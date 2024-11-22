@@ -1,6 +1,22 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
+async function handleConflict(username) {
+    let check = false;
+    const res = await fetch(
+        'https://673d528b0118dbfe8606df63.mockapi.io/api/v1/users'
+    );
+
+    if (!res.ok) {
+        console.error('Response not okay!');
+    }
+    const allUser = await res.json();
+
+    check = allUser.some((user) => user.userName == username);
+
+    return check;
+}
+
 function SignUpForm({ onFormChange }) {
     const [formData, setFormData] = useState({
         userName: '',
@@ -14,6 +30,12 @@ function SignUpForm({ onFormChange }) {
             ...formData,
             [name]: value,
         }));
+    }
+
+    async function handleSubmitForm(e) {
+        // e.preventDefault();
+        let conflict = true;
+        await handleConflict(formData.userName).then((res) => console.log(res));
     }
 
     return (
@@ -61,7 +83,15 @@ function SignUpForm({ onFormChange }) {
                 </Col>
             </Form.Group>
             <div className="d-grid mb-5">
-                <Button type="submit" variant="outline-success">
+                <Button
+                    type="submit"
+                    variant="outline-success"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        // window.location.href = '/dashboard';
+                        handleSubmitForm();
+                    }}
+                >
                     Welcome on board!
                 </Button>
             </div>

@@ -45,7 +45,14 @@ function SignInForm({ onFormChange }) {
                 </Col>
             </Form.Group>
             <div className="d-grid mb-5">
-                <Button type="submit" variant="outline-success">
+                <Button
+                    type="submit"
+                    variant="outline-success"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = '/dashboard';
+                    }}
+                >
                     Welcome Back!
                 </Button>
             </div>

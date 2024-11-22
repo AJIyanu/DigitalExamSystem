@@ -11,8 +11,8 @@ function App() {
         <Router>
             <div>
                 <Routes>
-                    <Route path="/landingpage" element={<LandingPage />} />
-                    <Route path="/" element={<UserDashboard />} />
+                    <Route path="/" element={<LandingPage />} />
+                    {/* <Route path="/" element={<UserDashboard />} /> */}
                     <Route path="/dashboard/*" element={<UserDashboard />} />
                 </Routes>
                 {/* <QuestionPage /> */}

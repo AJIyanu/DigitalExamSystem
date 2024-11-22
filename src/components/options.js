@@ -8,18 +8,28 @@ function RadioOptions({
 }) {
     return (
         <>
-            <div className="rounded setborder mb-2 p-3 d-flex justify-content-spacebetween">
-                <input
-                    type="radio"
-                    name={questionId}
-                    value={optionValue}
-                    checked={selectedOption === optionValue}
-                    onChange={(e) => changeOption(e.target.value)}
-                />
-                <label for={questionId}>{optionValue}</label>
-                <div>
-                    <div>A</div>
-                </div>
+            <div
+                className="rounded mb-2 p-3 radioptions"
+                onClick={() => {
+                    changeOption(optionValue);
+                }}
+            >
+                <label
+                    htmlFor={questionId}
+                    className="d-flex justify-content-between"
+                >
+                    <input
+                        type="radio"
+                        name={questionId}
+                        value={optionValue}
+                        checked={selectedOption === optionValue}
+                        onChange={(e) => changeOption(e.target.value)}
+                    />
+                    {optionValue}
+                    <div className="optionshield rounded">
+                        <div className="optionselected"></div>
+                    </div>
+                </label>
             </div>
         </>
     );
@@ -43,16 +53,9 @@ function Options({
     }
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginLeft: '50px',
-            }}
-        >
+        <div className="options">
             {optionsArray.map((eachOption, idx) => (
                 <RadioOptions
-                    className="gx-3[]"
                     questionId={questionId[0]}
                     optionValue={eachOption}
                     selectedOption={selectedOption}

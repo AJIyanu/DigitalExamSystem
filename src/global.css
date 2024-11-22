@@ -24,3 +24,53 @@
     font-size: 2rem;
     color: rgb(91, 0, 0);
 }
+
+.radioptions input[type='radio'] {
+    display: none;
+}
+
+.options {
+    max-width: 40vh;
+    display: 'flex';
+    flex-direction: 'column';
+    margin-left: '50px';
+}
+
+.radioptions {
+    border: 1px solid rgb(107, 64, 17);
+    cursor: pointer;
+}
+
+.optionshield {
+    cursor: pointer;
+    border: 2px solid rgb(107, 64, 17);
+    border-top: none;
+    border-bottom: none;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.optionselected {
+    /* background-color: aqua; */
+    width: 40px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radioptions
+    input[type='radio']:checked
+    + .optionshield
+    .optionselected::before {
+    content: '⭐';
+    background-color: rgba(107, 64, 17, 0.768);
+    width: 40px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
