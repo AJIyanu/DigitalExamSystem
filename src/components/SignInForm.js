@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
-function SignUpForm({ onFormChange }) {
+function SignInForm({ onFormChange }) {
     const [formData, setFormData] = useState({
         userName: '',
-        firstName: '',
-        lastName: '',
+        password: '',
     });
 
     function handleInputChange(e) {
@@ -28,49 +27,34 @@ function SignUpForm({ onFormChange }) {
                         value={formData.userName}
                         onChange={handleInputChange}
                     />
-                    <Form.Text className="text-success">
-                        This will be your unique id for logging in
-                    </Form.Text>
-                </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="firstName" as={Row}>
-                <Form.Label>First Name</Form.Label>
-                <Col md={12}>
-                    <Form.Control
-                        type="text"
-                        placeholder="Firstname"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                    />
                 </Col>
             </Form.Group>
             <Form.Group className="mb-4" controlId="lastName" as={Row}>
-                <Form.Label>Last Name</Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Col md={12}>
                     <Form.Control
-                        type="text"
-                        placeholder="Lastname"
-                        name="lastName"
+                        type="password"
+                        placeholder="password"
+                        name="password"
                         value={formData.lastName}
                         onChange={handleInputChange}
                     />
                     <Form.Text className="text-success">
-                        This will be used as your password
+                        Your Password is your Lastname
                     </Form.Text>
                 </Col>
             </Form.Group>
             <div className="d-grid mb-5">
                 <Button type="submit" variant="outline-success">
-                    Welcome on board!
+                    Welcome Back!
                 </Button>
             </div>
             <hr />
             <Form.Group as={Row} className="mt-4">
                 <Form.Label className="text-danger" column>
-                    Not your first time?
+                    First time here?
                 </Form.Label>
-                <Col xs={6}>
+                <Col xs={7}>
                     <div className="d-grid">
                         <Button
                             typeof="button"
@@ -78,7 +62,7 @@ function SignUpForm({ onFormChange }) {
                             className="me-0"
                             onClick={() => onFormChange()}
                         >
-                            Get Back in!
+                            Let's Walk You in!
                         </Button>
                     </div>
                 </Col>
@@ -87,4 +71,4 @@ function SignUpForm({ onFormChange }) {
     );
 }
 
-export default SignUpForm;
+export default SignInForm;
