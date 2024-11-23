@@ -12,9 +12,30 @@ async function handleConflict(username) {
     }
     const allUser = await res.json();
 
-    check = allUser.some((user) => user.userName == username);
+    check = allUser.some((user) => user.userName === username);
 
     return check;
+}
+
+async function addUserToAPI(url, data) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error making POST request:', error);
+    }
 }
 
 function SignUpForm({ onFormChange }) {
@@ -23,6 +44,8 @@ function SignUpForm({ onFormChange }) {
         firstName: '',
         lastName: '',
     });
+    const [isLoading, setIsLoading] = useState(false);
+    const [alertText, setAlertText] = useState('');
 
     function handleInputChange(e) {
         const { name, value } = e.target;
@@ -34,12 +57,39 @@ function SignUpForm({ onFormChange }) {
 
     async function handleSubmitForm(e) {
         // e.preventDefault();
-        let conflict = true;
-        await handleConflict(formData.userName).then((res) => console.log(res));
+        setIsLoading(true);
+        const conflict = await handleConflict(formData.userName);
+        if (!conflict && formData.firstName && formData.lastName) {
+            const res = await addUserToAPI(
+                'https://673d528b0118dbfe8606df63.mockapi.io/api/v1/users',
+                formData
+            );
+            if (!res) {
+                console.error('User not updated');
+            } else {
+                window.location.href = '/dashboard/' + res.id;
+            }
+        } else if (conflict) {
+            setIsLoading(false);
+            setAlertText(`Oops! Username already exists...`);
+        } else {
+            setIsLoading(false);
+            setAlertText(`Oops! Did you forget firstname/lastname?`);
+        }
     }
 
     return (
         <Form>
+            {alertText ? (
+                <div
+                    className="alert alert-danger text-align-center"
+                    role="alert"
+                >
+                    {alertText}
+                </div>
+            ) : (
+                <></>
+            )}
             <Form.Group className="mb-3" controlId="username" as={Row}>
                 <Form.Label>Username</Form.Label>
                 <Col md={12}>
@@ -86,6 +136,7 @@ function SignUpForm({ onFormChange }) {
                 <Button
                     type="submit"
                     variant="outline-success"
+                    disabled={isLoading}
                     onClick={(e) => {
                         e.preventDefault();
                         // window.location.href = '/dashboard';
@@ -93,6 +144,15 @@ function SignUpForm({ onFormChange }) {
                     }}
                 >
                     Welcome on board!
+                    {isLoading ? (
+                        <span
+                            class="spinner-border spinner-border-sm ms-3"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                    ) : (
+                        <></>
+                    )}
                 </Button>
             </div>
             <hr />

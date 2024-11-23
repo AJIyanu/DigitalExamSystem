@@ -12,7 +12,7 @@ function UserDashboard() {
     return (
         <>
             <Header />
-            <Container fluid className="bg-img">
+            <Container fluid className="">
                 <Row>
                     <Col
                         xs={4}
@@ -25,7 +25,7 @@ function UserDashboard() {
                     </Col>
                     <Col className="white-bg rounded m-1 mt-2">
                         <Routes>
-                            {/* <Route path="" element={<QuestionPage />} /> */}
+                            <Route path="/:userId" element={<QuestionPage />} />
                             <Route
                                 path="/questions"
                                 element={<QuestionPage />}
