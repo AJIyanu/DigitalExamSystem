@@ -6,6 +6,7 @@ import Options from '../components/options';
 import '../App.css';
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 let allQuestionObject = [
     {
@@ -19,13 +20,7 @@ let allQuestionObject = [
     },
 ];
 
-function shuffleOptions(options = []) {
-    for (let i = options.length - 1; i > 0; i--) {
-        const randomIndex = Math.floor(Math.random() * (i + 1));
-        [options[i], options[randomIndex]] = [options[randomIndex], options[i]];
-    }
-    // return options
-}
+// Components
 
 function Exam() {
     const [questionNumber, setQuestionNumber] = useState(0);
@@ -127,36 +122,35 @@ function Exam() {
     );
 }
 
-function markAnswers(studentQuestion) {
-    let score = 0;
-    studentQuestion.forEach((question) => {
-        if (question.answer === question.selectedOption) score++;
-    });
-    return score;
-}
-
-function DisplayResult({ result, questions }) {
-    return (
-        <h3>
-            Congratulations! You got {result} questions right out of{' '}
-            {questions.length}
-        </h3>
-    );
-}
-
 function UserInfo() {
+    const { userId } = useParams();
+    const [userInfo, setUserInfo] = useState({
+        firstName: '',
+        lastName: '',
+        profilePicture: '',
+    });
+
+    useEffect(() => {
+        fetchUserDetails(
+            `https://673d528b0118dbfe8606df63.mockapi.io/api/v1/users/${userId}`
+        ).then((res) => {
+            setUserInfo(res);
+        });
+    }, [userId]);
+
     return (
         <Stack direction="horizontal" className="p-4">
             <div>
-                <h3>{`Welcome Lastname Firstname`}</h3>
+                <h3>{`Welcome ${userInfo.lastName} ${userInfo.firstName}`}</h3>
             </div>
 
             <Image
                 roundedCircle
-                src="https://img.icons8.com/officel/150/person-male.png"
+                src={userInfo.profilePicture}
                 alt="person-avatar"
                 className="ms-auto"
                 height={150}
+                width={150}
             />
         </Stack>
     );
@@ -194,6 +188,46 @@ function QuestionPage() {
             </Col>
         </div>
     );
+}
+
+//Functions used by components
+
+function markAnswers(studentQuestion) {
+    let score = 0;
+    studentQuestion.forEach((question) => {
+        if (question.answer === question.selectedOption) score++;
+    });
+    return score;
+}
+
+function DisplayResult({ result, questions }) {
+    return (
+        <h3>
+            Congratulations! You got {result} questions right out of{' '}
+            {questions.length}
+        </h3>
+    );
+}
+
+function shuffleOptions(options = []) {
+    for (let i = options.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [options[i], options[randomIndex]] = [options[randomIndex], options[i]];
+    }
+    // return options
+}
+
+async function fetchUserDetails(url) {
+    const res = await fetch(url);
+
+    if (!res.ok)
+        console.error(
+            'Request didnt go through! Fecting user details gone wrong'
+        );
+
+    const userDetails = await res.json();
+
+    return userDetails;
 }
 
 export default QuestionPage;
