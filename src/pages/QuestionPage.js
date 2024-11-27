@@ -1,7 +1,8 @@
-import { Stack, Image, Button, ButtonGroup, Col, Row } from 'react-bootstrap';
+import { Stack, Image, Button, Col, Row } from 'react-bootstrap';
 
 import Question from '../components/question';
 import Options from '../components/options';
+import CountDownTimer from '../components/CountDownTimer';
 
 import '../App.css';
 
@@ -22,7 +23,7 @@ let allQuestionObject = [
 
 // Components
 
-function Exam() {
+function Exam({ submit }) {
     const [questionNumber, setQuestionNumber] = useState(0);
     const [emptyQuestions, loadedQuestions] = useState(allQuestionObject);
     // console.log(allQuestionObject, emptyQuestions)
@@ -72,7 +73,15 @@ function Exam() {
     return (
         <>
             <div className="m-5">
-                <h2>Question Number {questionNumber + 1}</h2>
+                <Stack direction="horizontal">
+                    <h2>Question Number {questionNumber + 1}</h2>
+                    <div className="ms-auto">
+                        <CountDownTimer
+                            onTimerEnd={submit}
+                            endTime="2024-11-27T15:40:21.629Z"
+                        />
+                    </div>
+                </Stack>
                 <h4>
                     <i>Read the below instructions carefully</i>
                 </h4>
@@ -176,7 +185,7 @@ function QuestionPage() {
                     questions={allQuestionObject}
                 />
             ) : (
-                <Exam />
+                <Exam submit={handleSubmitButton} />
             )}
             {/* <Exam /> */}
             <Col xs={3}>
