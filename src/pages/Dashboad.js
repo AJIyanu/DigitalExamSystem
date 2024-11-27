@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import QuestionPage from './QuestionPage';
 import SidePanel from '../components/SidePanels';
 import ExamHistory from './ExamHistory';
+import ScheduledExams from './ScheduledExams';
 
 import '../global.css';
 
@@ -25,7 +26,10 @@ function UserDashboard() {
                     </Col>
                     <Col className="white-bg rounded m-1 mt-2">
                         <Routes>
-                            <Route path="/:userId" element={<QuestionPage />} />
+                            <Route
+                                path="/:userId"
+                                element={<ScheduledExams />}
+                            />
                             <Route
                                 path="/questions"
                                 element={<QuestionPage />}

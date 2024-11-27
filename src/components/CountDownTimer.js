@@ -14,7 +14,7 @@ function CountDownTimer({ endTime, onTimerEnd }) {
                 setTime(time - 1000);
             }
         }, 1000);
-    }, [time]);
+    }, [time, onTimerEnd]);
 
     function formatTime(milliseconds) {
         const totalSeconds = Math.floor(milliseconds / 1000);
