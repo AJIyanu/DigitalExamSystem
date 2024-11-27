@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
-async function handleConflict(username) {
-    let check = false;
-    const res = await fetch(
+export async function fetchUserByUsername(username) {
+    const url = new URL(
         'https://673d528b0118dbfe8606df63.mockapi.io/api/v1/users'
     );
+    url.searchParams.append('userName', username);
+    const res = await fetch(url);
 
     if (!res.ok) {
         console.error('Response not okay!');
+        return false;
     }
-    const allUser = await res.json();
-
-    check = allUser.some((user) => user.userName === username);
-
-    return check;
+    // const allUser = await res.json();
+    return await res.json();
 }
 
 async function addUserToAPI(url, data) {
@@ -56,9 +55,9 @@ function SignUpForm({ onFormChange }) {
     }
 
     async function handleSubmitForm(e) {
-        // e.preventDefault();
+        e.preventDefault();
         setIsLoading(true);
-        const conflict = await handleConflict(formData.userName);
+        const conflict = await fetchUserByUsername(formData.userName);
         if (!conflict && formData.firstName && formData.lastName) {
             const res = await addUserToAPI(
                 'https://673d528b0118dbfe8606df63.mockapi.io/api/v1/users',
@@ -137,16 +136,12 @@ function SignUpForm({ onFormChange }) {
                     type="submit"
                     variant="outline-success"
                     disabled={isLoading}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        // window.location.href = '/dashboard';
-                        handleSubmitForm();
-                    }}
+                    onClick={handleSubmitForm}
                 >
                     Welcome on board!
                     {isLoading ? (
                         <span
-                            class="spinner-border spinner-border-sm ms-3"
+                            className="spinner-border spinner-border-sm ms-3"
                             role="status"
                             aria-hidden="true"
                         />

@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import { fetchUserByUsername } from './SignUpForm';
 
 function SignInForm({ onFormChange }) {
     const [formData, setFormData] = useState({
         userName: '',
         password: '',
     });
+    const [isLoading, setIsLoading] = useState(false);
+    const [alertText, setAlertText] = useState('');
 
     function handleInputChange(e) {
         const { name, value } = e.target;
@@ -15,8 +18,34 @@ function SignInForm({ onFormChange }) {
         }));
     }
 
+    async function handleSubmitForm(e) {
+        e.preventDefault();
+        setIsLoading(true);
+        const conflict = await fetchUserByUsername(formData.userName);
+        if (!conflict) {
+            setIsLoading(false);
+            setAlertText('Oops! Username does not exist');
+        } else if (conflict[0].lastName !== formData.password) {
+            setIsLoading(false);
+            setAlertText(`Oops! Your lastname is your password`);
+        } else {
+            setIsLoading(false);
+            window.location.href = '/dashboard/' + conflict[0].id;
+        }
+    }
+
     return (
         <Form>
+            {alertText ? (
+                <div
+                    className="alert alert-danger text-align-center"
+                    role="alert"
+                >
+                    {alertText}
+                </div>
+            ) : (
+                <></>
+            )}
             <Form.Group className="mb-3" controlId="username" as={Row}>
                 <Form.Label>Username</Form.Label>
                 <Col md={12}>
@@ -48,12 +77,18 @@ function SignInForm({ onFormChange }) {
                 <Button
                     type="submit"
                     variant="outline-success"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = '/dashboard';
-                    }}
+                    onClick={handleSubmitForm}
                 >
                     Welcome Back!
+                    {isLoading ? (
+                        <span
+                            className="spinner-border spinner-border-sm ms-3"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                    ) : (
+                        <></>
+                    )}
                 </Button>
             </div>
             <hr />

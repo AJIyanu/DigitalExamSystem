@@ -23,7 +23,7 @@ function LandingPage() {
                     className={`pageheight primary-bg-color d-none d-md-flex ${vertHorCntr}`}
                 >
                     <img
-                        fluid
+                        //fluid
                         // mx={9}
                         src="img/landingPage.webp"
                         height={500}
