@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import CountDownTimer from './CountDownTimer';
 
 export async function fetchUserByUsername(username) {
     const url = new URL(
@@ -168,6 +169,7 @@ function SignUpForm({ onFormChange }) {
                     </div>
                 </Col>
             </Form.Group>
+            <CountDownTimer duration={2 * 60 * 60 * 1000} />
         </Form>
     );
 }
