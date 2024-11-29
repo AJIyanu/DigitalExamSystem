@@ -74,3 +74,9 @@
     align-items: center;
     border-radius: 6px;
 }
+
+.card-img {
+    width: 150px;
+    height: 150px;
+    margin-left: calc(50% - 75px);
+}
