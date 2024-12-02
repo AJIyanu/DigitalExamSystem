@@ -26,12 +26,12 @@ let allQuestionObject = [
 function Exam({ submit }) {
     const [questionNumber, setQuestionNumber] = useState(0);
     const [emptyQuestions, loadedQuestions] = useState(allQuestionObject);
-    // console.log(allQuestionObject, emptyQuestions)
+    console.log(allQuestionObject, emptyQuestions)
 
     useEffect(() => {
         const loadQuestions = async () => {
             await fetch(
-                'https://673d528b0118dbfe8606df63.mockapi.io/api/v1/questions'
+                'http://127.0.0.1:5000/api/v1/questions'
             )
                 .then(async (response) => {
                     const userQuestions = await response.json();
@@ -78,7 +78,7 @@ function Exam({ submit }) {
                     <div className="ms-auto">
                         <CountDownTimer
                             onTimerEnd={submit}
-                            endTime="2024-11-27T15:40:21.629Z"
+                            endTime="2024-12-02T22:40:21.629Z"
                         />
                     </div>
                 </Stack>
