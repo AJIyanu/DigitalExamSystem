@@ -3,7 +3,7 @@
 }
 
 .pageheight {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .primary-bg-color {
@@ -79,4 +79,8 @@
     width: 150px;
     height: 150px;
     margin-left: calc(50% - 75px);
+}
+
+.card {
+    min-height: 500px;
 }

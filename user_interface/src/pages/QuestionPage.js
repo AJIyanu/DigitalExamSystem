@@ -26,13 +26,12 @@ let allQuestionObject = [
 function Exam({ submit }) {
     const [questionNumber, setQuestionNumber] = useState(0);
     const [emptyQuestions, loadedQuestions] = useState(allQuestionObject);
-    console.log(allQuestionObject, emptyQuestions)
+    const [duration, setDuration] = useState(examDuration());
+    console.log(allQuestionObject, emptyQuestions);
 
     useEffect(() => {
         const loadQuestions = async () => {
-            await fetch(
-                'http://127.0.0.1:5000/api/v1/questions'
-            )
+            await fetch('http://127.0.0.1:5000/api/v1/questions')
                 .then(async (response) => {
                     const userQuestions = await response.json();
                     userQuestions.forEach((eachQuestion) => {
@@ -47,6 +46,35 @@ function Exam({ submit }) {
 
         loadQuestions();
     }, []);
+
+    function examDuration() {
+        const storedDuration = localStorage.getItem('quizDuration');
+
+        const now = new Date();
+        const storedTime = new Date(storedDuration);
+
+        if (storedDuration) {
+            if (storedTime > now) {
+                // setDuration(storedDuration);
+                return storedDuration;
+            } else {
+                // Calculate duration two hours from now
+                now.setHours(now.getHours() + 2);
+                const durationTwoHours = now.toISOString();
+                // setDuration(durationTwoHours);
+                localStorage.setItem('quizDuration', durationTwoHours);
+                return durationTwoHours;
+            }
+        }
+        return setEndTime(now);
+    }
+
+    function setEndTime(now) {
+        now.setHours(now.getHours() + 2);
+        const durationTwoHours = now.toISOString();
+        localStorage.setItem('quizDuration', durationTwoHours);
+        return durationTwoHours;
+    }
 
     function handleNextButton() {
         if (questionNumber >= emptyQuestions.length - 1) {
@@ -78,7 +106,7 @@ function Exam({ submit }) {
                     <div className="ms-auto">
                         <CountDownTimer
                             onTimerEnd={submit}
-                            endTime="2024-12-02T22:40:21.629Z"
+                            endTime={duration}
                         />
                     </div>
                 </Stack>

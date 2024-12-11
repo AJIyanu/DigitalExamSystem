@@ -31,7 +31,7 @@ function UserDashboard() {
                                 element={<ScheduledExams />}
                             />
                             <Route
-                                path="/questions"
+                                path="/:userId/questions/:subject"
                                 element={<QuestionPage />}
                             />
                             <Route

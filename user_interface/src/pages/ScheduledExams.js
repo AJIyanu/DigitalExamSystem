@@ -2,25 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Row, Col, Placeholder } from 'react-bootstrap';
 import UserInfo from '../components/UserInfo';
 import '../global.css';
+import { useParams } from 'react-router-dom';
 
 function ScheduledExams() {
     const [userScheduledExams, setUserScheduledExams] = useState({ length: 4 });
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        async function fetchData() {
+            const data = await fetchDetails(
+                'http://127.0.0.1:5000/api/v1/scheduledexams'
+            );
+            setUserScheduledExams(data);
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+            setIsLoading(false);
+        }
+        fetchData();
+    }, []);
+
+    // useEffect(() => {}, []);
     return (
         <div>
             <UserInfo />
             <hr />
-            <Row xs={1} md={2} lg={3} xl={4} className="g-3">
+            <Row
+                xs={1}
+                md={2}
+                lg={3}
+                xl={4}
+                className="g-3"
+                style={{ display: 'flex', alignItems: 'stretch' }}
+            >
                 {Array.from(userScheduledExams).map((_, idx) => (
                     <Col key={idx}>
-                        <LoadingCard
-                            name="Nursing"
-                            duration="30 minutes"
-                            instruction="Once exam is started, no quitting... Goodluck!"
-                            img="https://img.icons8.com/3d-fluency/94/nurse-female--v4.png"
-                        />
+                        {isLoading ? <LoadingCard /> : <SubjectCard {..._} />}
                     </Col>
                 ))}
             </Row>
@@ -29,6 +44,8 @@ function ScheduledExams() {
 }
 
 function SubjectCard({ name, instruction, duration, img }) {
+    const { userId } = useParams();
+
     return (
         <Card>
             <Card.Img
@@ -61,7 +78,13 @@ function SubjectCard({ name, instruction, duration, img }) {
                 </Card.Body>
             </Card.Body>
             <Card.Footer className="d-grid">
-                <Button xs={6}>Start</Button>
+                <Button
+                    xs={6}
+                    as="a"
+                    href={`/dashboard/${userId}/questions/${name.replace(/\s+/g, '')}`}
+                >
+                    Start
+                </Button>
             </Card.Footer>
         </Card>
     );

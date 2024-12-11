@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Mathematics",
+    "instruction": "Answer all questions. Show all workings where necessary. Use a calculator where necessary.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "English Language",
+    "instruction": "Answer all questions. Write legibly and concisely. Use correct grammar and punctuation.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Physics",
+    "instruction": "Answer all questions. Show all workings clearly. Use a calculator where necessary. Use the appropriate units for your answers.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Chemistry",
+    "instruction": "Answer all questions. Show all workings clearly. Use a calculator where necessary. Use the appropriate units for your answers.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Biology",
+    "instruction": "Answer all questions. Write legibly and concisely. Use correct biological terms.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Economics",
+    "instruction": "Answer all questions. Use relevant economic theories and concepts to support your answers.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Geography",
+    "instruction": "Answer all questions. Use maps and diagrams where necessary. Refer to specific examples to illustrate your points.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "History",
+    "instruction": "Answer all questions. Use historical facts and evidence to support your answers. Write in clear and concise language.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Government",
+    "instruction": "Answer all questions. Use relevant political theories and concepts to support your answers. Refer to specific examples to illustrate your points.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Computer Science",
+    "instruction": "Answer all questions. Write clear and concise code. Use appropriate algorithms and data structures.",
+    "duration": "3 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Further Mathematics",
+    "instruction": "Answer all questions. Show all workings clearly. Use a calculator where necessary. Use the appropriate mathematical notation.",
+    "duration": "3 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  },
+  {
+    "name": "Agricultural Science",
+    "instruction": "Answer all questions. Use relevant agricultural concepts and practices to support your answers.",
+    "duration": "2 hours",
+    "img": "https://img.icons8.com/ios-filled/100/formula-fx.png"
+  }
+]
