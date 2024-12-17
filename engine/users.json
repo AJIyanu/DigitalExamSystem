@@ -1,0 +1,42 @@
+[
+    {
+        "createdAt": "2024-11-24T11:32:27.689Z",
+        "firstName": "Changed",
+        "lastName": "Adekola",
+        "userName": "Lisabi_labule",
+        "profilePicture": "https://loremflickr.com/640/480/people",
+        "examHistory": [],
+        "userId": "b5e1ff91-d6ac-4c0f-a6b8-c4f4704ad0c5"
+    },
+    {
+        "userName": "AJ Iyanu",
+        "firstName": "Joseph",
+        "lastName": "Aderemi",
+        "userId": "28ec72d8-ae3f-4471-a518-160ed4141a7d",
+        "profilePicture": "https://randomuser.me/api/portraits/men/75.jpg"
+    },
+    {
+        "userName": "Arike",
+        "firstName": "Olabisi",
+        "lastName": "Aderemi",
+        "userId": "857cec19-a2ec-490b-9ff8-0df7cf9d9b8b",
+        "profilePicture": "https://randomuser.me/api/portraits/men/8.jpg",
+        "examHistory": []
+    },
+    {
+        "userName": "OAEEmpire",
+        "firstName": "Lateef",
+        "lastName": "Eniola",
+        "userId": "03db1b66-3853-432a-a57d-bb54a2400780",
+        "profilePicture": "https://randomuser.me/api/portraits/men/100.jpg",
+        "examHistory": []
+    },
+    {
+        "userName": "scribbles",
+        "firstName": "Oreoluwa",
+        "lastName": "Akinbo",
+        "userId": "7808f71a-930a-44cd-b8c9-8eb1a17b2412",
+        "profilePicture": "https://randomuser.me/api/portraits/men/22.jpg",
+        "examHistory": []
+    }
+]

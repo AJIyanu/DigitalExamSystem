@@ -25,12 +25,12 @@ function SignInForm({ onFormChange }) {
         if (!conflict) {
             setIsLoading(false);
             setAlertText('Oops! Username does not exist');
-        } else if (conflict[0].lastName !== formData.password) {
+        } else if (conflict.lastName !== formData.password) {
             setIsLoading(false);
             setAlertText(`Oops! Your lastname is your password`);
         } else {
             setIsLoading(false);
-            window.location.href = '/dashboard/' + conflict[0].id;
+            window.location.href = '/dashboard/' + conflict.userName;
         }
     }
 

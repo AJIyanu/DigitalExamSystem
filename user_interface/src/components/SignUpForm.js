@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
 export async function fetchUserByUsername(username) {
-    const url = new URL(
-        'https://673d528b0118dbfe8606df63.mockapi.io/api/v1/users'
-    );
+    const url = new URL('http://localhost:5000/api/v1/users');
     url.searchParams.append('userName', username);
     const res = await fetch(url);
 
@@ -60,13 +58,13 @@ function SignUpForm({ onFormChange }) {
         const conflict = await fetchUserByUsername(formData.userName);
         if (!conflict && formData.firstName && formData.lastName) {
             const res = await addUserToAPI(
-                'https://673d528b0118dbfe8606df63.mockapi.io/api/v1/users',
+                'http://localhost:5000/api/v1/users',
                 formData
             );
             if (!res) {
                 console.error('User not updated');
             } else {
-                window.location.href = '/dashboard/' + res.id;
+                window.location.href = '/dashboard/' + res.userName;
             }
         } else if (conflict) {
             setIsLoading(false);

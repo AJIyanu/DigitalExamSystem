@@ -11,11 +11,11 @@ function UserInfo() {
     });
 
     useEffect(() => {
-        fetchUserDetails(
-            `https://673d528b0118dbfe8606df63.mockapi.io/api/v1/users/${userId}`
-        ).then((res) => {
-            setUserInfo(res);
-        });
+        fetchUserDetails(`http://localhost:5000/api/v1/users/${userId}`).then(
+            (res) => {
+                setUserInfo(res);
+            }
+        );
     }, [userId]);
 
     return (
