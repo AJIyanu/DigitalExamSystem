@@ -1,6 +1,6 @@
 import { Stack, NavLink } from 'react-bootstrap';
 
-import '../global.css';
+// import '../common.css';
 
 function Header() {
     return (

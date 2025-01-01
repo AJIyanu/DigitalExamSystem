@@ -7,7 +7,7 @@ import SidePanel from '../components/SidePanels';
 import ExamHistory from './ExamHistory';
 import ScheduledExams from './ScheduledExams';
 
-import '../global.css';
+// import '../common.css';
 
 function UserDashboard() {
     return (

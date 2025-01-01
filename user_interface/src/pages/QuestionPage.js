@@ -5,7 +5,7 @@ import Options from '../components/options';
 import CountDownTimer from '../components/CountDownTimer';
 import UserInfo from '../components/UserInfo';
 
-import '../App.css';
+// import '../App.css';
 
 import { useEffect, useState } from 'react';
 

@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import SignUpForm from '../components/SignUpForm';
 import SignInForm from '../components/SignInForm';
 
-import '../global.css';
+// import '../common.css';
 import { useState } from 'react';
 
 const vertHorCntr = 'flex-column align-items-center justify-content-center';

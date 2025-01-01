@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Row, Col, Placeholder } from 'react-bootstrap';
 import UserInfo from '../components/UserInfo';
-import '../global.css';
+// import '../common.css';
 import { useParams } from 'react-router-dom';
 
 function ScheduledExams() {
