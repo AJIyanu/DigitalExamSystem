@@ -26,8 +26,7 @@ function LandingPage() {
                         //fluid
                         // mx={9}
                         src="img/landingPage.webp"
-                        height={500}
-                        className="mx-auto"
+                        className="h-[500px]"
                         alt="cbtonlinetest"
                     />
                     <h1>My Exam, My Confidence</h1>

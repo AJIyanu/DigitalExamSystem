@@ -4,7 +4,7 @@ function SidePanel() {
     return (
         <Nav variant="pills" className="flex-column">
             <Nav.Item className="">
-                <Nav.Link eventKey="questions" href="/dashboard/questions">
+                <Nav.Link eventKey="questions" href="/dashboard/scheduledexams">
                     Take Exam
                 </Nav.Link>
             </Nav.Item>

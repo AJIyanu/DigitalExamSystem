@@ -48,25 +48,27 @@ function Exam({ submit }) {
     }, []);
 
     function examDuration() {
-        const storedDuration = localStorage.getItem('quizDuration');
+        useEffect(() => {
+            const storedDuration = localStorage.getItem('quizDuration');
 
-        const now = new Date();
-        const storedTime = new Date(storedDuration);
+            const now = new Date();
+            const storedTime = new Date(storedDuration);
 
-        if (storedDuration) {
-            if (storedTime > now) {
-                // setDuration(storedDuration);
-                return storedDuration;
-            } else {
-                // Calculate duration two hours from now
-                now.setHours(now.getHours() + 2);
-                const durationTwoHours = now.toISOString();
-                // setDuration(durationTwoHours);
-                localStorage.setItem('quizDuration', durationTwoHours);
-                return durationTwoHours;
+            if (storedDuration) {
+                if (storedTime > now) {
+                    // setDuration(storedDuration);
+                    return storedDuration;
+                } else {
+                    // Calculate duration two hours from now
+                    now.setHours(now.getHours() + 2);
+                    const durationTwoHours = now.toISOString();
+                    // setDuration(durationTwoHours);
+                    localStorage.setItem('quizDuration', durationTwoHours);
+                    return durationTwoHours;
+                }
+                return setEndTime(now);
             }
-        }
-        return setEndTime(now);
+        }, []);
     }
 
     function setEndTime(now) {
