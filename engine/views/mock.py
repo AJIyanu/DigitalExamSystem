@@ -1,5 +1,6 @@
 import random
 import json
+from datetime import datetime
 from uuid import uuid4
 from flask import request
 from flask import jsonify
@@ -13,9 +14,19 @@ def get_questions() -> jsonify:
     """
     try:
         with open('questions.json', 'r') as f:
-            questions = json.load(f)  # Load the json file into a python list
+            questions = json.load(f)
+            for question in questions:
+                question['options'].append(question['answer'])
+            response = {
+                "questionId": str(uuid4),
+                "allQuestions": questions,
+                "startTime": str(datetime.now),
+                "endTime": "0489450",
+                "subject": "Nursing",
+                "academicClass": "anonymous"
+            }
 
-            return jsonify(questions)
+            return jsonify(response)
     except FileNotFoundError:
         return jsonify({"error": "questions.json not found"}), 404
     except json.JSONDecodeError:

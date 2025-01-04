@@ -1,11 +1,26 @@
 import { useState, useEffect } from 'react';
+import React from 'react';
+
+interface RadioOptionsProps {
+    questionId: string;
+    optionValue: string;
+    selectedOption: string;
+    changeOption: (option: string) => void;
+}
+
+interface OptionsProps {
+    optionsArray: string[];
+    allowMultiple?: boolean;
+    questionId: [string, string | null];
+    cllbck: (option: string) => void;
+}
 
 function RadioOptions({
     questionId,
     optionValue,
     selectedOption,
     changeOption,
-}) {
+}: RadioOptionsProps): React.JSX.Element {
     return (
         <>
             <div
@@ -36,18 +51,18 @@ function RadioOptions({
 }
 
 function Options({
-    optionsArray = [],
+    optionsArray,
     allowMultiple = false,
     questionId,
     cllbck,
-}) {
+}: OptionsProps): React.JSX.Element {
     const [selectedOption, setSelectedOption] = useState(questionId[1]);
 
     useEffect(() => {
         setSelectedOption(questionId[1]);
     }, [optionsArray, questionId]);
 
-    function handleOptionChange(newSelectedOption) {
+    function handleOptionChange(newSelectedOption: string) {
         setSelectedOption(newSelectedOption);
         cllbck(newSelectedOption);
     }

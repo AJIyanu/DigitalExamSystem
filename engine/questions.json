@@ -1,182 +1,206 @@
 [
-    {
-        "id": "1",
-        "Question": "What is the normal range of adult blood pressure?",
-        "answer": "120/80 mmHg",
-        "otherOptions": ["140/90 mmHg", "100/60 mmHg", "160/100 mmHg"],
-        "allowMultiple": false,
-        "instructions": "Choose the correct value.",
-        "selectedOption": null
-    },
-    {
-        "id": "2",
-        "Question": "What does PRN stand for in medical terms?",
-        "answer": "As needed",
-        "otherOptions": ["After meals", "Before bed", "Every 6 hours"],
-        "allowMultiple": false,
-        "instructions": "Select the correct meaning.",
-        "selectedOption": null
-    },
-    {
-        "id": "3",
-        "Question": "Which vitamin deficiency causes scurvy?",
-        "answer": "Vitamin C",
-        "otherOptions": ["Vitamin D", "Vitamin A", "Vitamin B12"],
-        "allowMultiple": false,
-        "instructions": "Identify the correct vitamin.",
-        "selectedOption": null
-    },
-    {
-        "id": "4",
-        "Question": "What is the most common site for taking a pulse in an adult?",
-        "answer": "Radial artery",
-        "otherOptions": ["Carotid artery", "Femoral artery", "Brachial artery"],
-        "allowMultiple": false,
-        "instructions": "Choose the correct site.",
-        "selectedOption": null
-    },
-    {
-        "id": "5",
-        "Question": "What does HIPAA stand for?",
-        "answer": "Health Insurance Portability and Accountability Act",
-        "otherOptions": ["Health Information Privacy and Assurance Act", "Healthcare Insurance Protection and Accountability Act", "Health Information Processing and Access Act"],
-        "allowMultiple": false,
-        "instructions": "Select the correct full form.",
-        "selectedOption": null
-    },
-    {
-        "id": "6",
-        "Question": "What is the normal respiratory rate for a healthy adult?",
-        "answer": "12-20 breaths per minute",
-        "otherOptions": ["8-16 breaths per minute", "20-28 breaths per minute", "10-18 breaths per minute"],
-        "allowMultiple": false,
-        "instructions": "Choose the correct range.",
-        "selectedOption": null
-    },
-    {
-        "id": "7",
-        "Question": "Which instrument is used to measure blood pressure?",
-        "answer": "Sphygmomanometer",
-        "otherOptions": ["Thermometer", "Stethoscope", "Pulse oximeter"],
-        "allowMultiple": false,
-        "instructions": "Select the correct instrument.",
-        "selectedOption": null
-    },
-    {
-        "id": "8",
-        "Question": "What is the primary purpose of hand hygiene in healthcare?",
-        "answer": "To prevent infection",
-        "otherOptions": ["To improve skin condition", "To meet regulations", "To maintain personal hygiene"],
-        "allowMultiple": false,
-        "instructions": "Identify the main purpose.",
-        "selectedOption": null
-    },
-    {
-        "id": "9",
-        "Question": "What is the normal pH range of blood?",
-        "answer": "7.35-7.45",
-        "otherOptions": ["6.8-7.2", "7.0-7.2", "7.5-7.8"],
-        "allowMultiple": false,
-        "instructions": "Choose the correct pH range.",
-        "selectedOption": null
-    },
-    {
-        "id": "10",
-        "Question": "What is the primary function of red blood cells?",
-        "answer": "To carry oxygen",
-        "otherOptions": ["To fight infection", "To clot blood", "To regulate temperature"],
-        "allowMultiple": false,
-        "instructions": "Select the main function.",
-        "selectedOption": null
-    },
-    {
-        "id": "11",
-        "Question": "What does BMI stand for?",
-        "answer": "Body Mass Index",
-        "otherOptions": ["Basic Metabolic Indicator", "Body Measurement Index", "Biological Mass Index"],
-        "allowMultiple": false,
-        "instructions": "Identify the correct term.",
-        "selectedOption": null
-    },
-    {
-        "id": "12",
-        "Question": "Which condition is characterized by high blood sugar levels?",
-        "answer": "Diabetes",
-        "otherOptions": ["Hypertension", "Anemia", "Asthma"],
-        "allowMultiple": false,
-        "instructions": "Choose the correct condition.",
-        "selectedOption": null
-    },
-    {
-        "id": "13",
-        "Question": "What is the role of insulin in the body?",
-        "answer": "To regulate blood sugar",
-        "otherOptions": ["To fight infections", "To aid digestion", "To build muscle"],
-        "allowMultiple": false,
-        "instructions": "Select the correct role.",
-        "selectedOption": null
-    },
-    {
-        "id": "14",
-        "Question": "What is the main symptom of dehydration?",
-        "answer": "Thirst",
-        "otherOptions": ["Nausea", "Fever", "Cough"],
-        "allowMultiple": false,
-        "instructions": "Identify the primary symptom.",
-        "selectedOption": null
-    },
-    {
-        "id": "15",
-        "Question": "What is the normal body temperature in Celsius?",
-        "answer": "37°C",
-        "otherOptions": ["36°C", "38°C", "39°C"],
-        "allowMultiple": false,
-        "instructions": "Choose the correct value.",
-        "selectedOption": null
-    },
-    {
-        "id": "16",
-        "Question": "What does ECG stand for?",
-        "answer": "Electrocardiogram",
-        "otherOptions": ["Electroencephalogram", "Electroconvulsive Graph", "Echocardiogram"],
-        "allowMultiple": false,
-        "instructions": "Select the correct term.",
-        "selectedOption": null
-    },
-    {
-        "id": "17",
-        "Question": "What is the main organ affected by hepatitis?",
-        "answer": "Liver",
-        "otherOptions": ["Kidney", "Heart", "Lungs"],
-        "allowMultiple": false,
-        "instructions": "Identify the affected organ.",
-        "selectedOption": null
-    },
-    {
-        "id": "18",
-        "Question": "What is the term for low levels of red blood cells?",
-        "answer": "Anemia",
-        "otherOptions": ["Leukopenia", "Thrombocytopenia", "Polycythemia"],
-        "allowMultiple": false,
-        "instructions": "Choose the correct condition.",
-        "selectedOption": null
-    },
-    {
-        "id": "19",
-        "Question": "What is the medical term for high blood pressure?",
-        "answer": "Hypertension",
-        "otherOptions": ["Hypotension", "Hyperlipidemia", "Hypoxemia"],
-        "allowMultiple": false,
-        "instructions": "Select the correct term.",
-        "selectedOption": null
-    },
-    {
-        "id": "20",
-        "Question": "Which nutrient is essential for blood clotting?",
-        "answer": "Vitamin K",
-        "otherOptions": ["Vitamin C", "Vitamin D", "Vitamin A"],
-        "allowMultiple": false,
-        "instructions": "Identify the essential nutrient.",
-        "selectedOption": null
-    }
+  {
+    "id": "1",
+    "Question": "What is the normal range of adult blood pressure?",
+    "answer": "120/80 mmHg",
+    "options": ["140/90 mmHg", "100/60 mmHg", "160/100 mmHg"],
+    "allowMultiple": false,
+    "instructions": "Choose the correct value.",
+    "selectedOption": null
+  },
+  {
+    "id": "2",
+    "Question": "What does PRN stand for in medical terms?",
+    "answer": "As needed",
+    "options": ["After meals", "Before bed", "Every 6 hours"],
+    "allowMultiple": false,
+    "instructions": "Select the correct meaning.",
+    "selectedOption": null
+  },
+  {
+    "id": "3",
+    "Question": "Which vitamin deficiency causes scurvy?",
+    "answer": "Vitamin C",
+    "options": ["Vitamin D", "Vitamin A", "Vitamin B12"],
+    "allowMultiple": false,
+    "instructions": "Identify the correct vitamin.",
+    "selectedOption": null
+  },
+  {
+    "id": "4",
+    "Question": "What is the most common site for taking a pulse in an adult?",
+    "answer": "Radial artery",
+    "options": ["Carotid artery", "Femoral artery", "Brachial artery"],
+    "allowMultiple": false,
+    "instructions": "Choose the correct site.",
+    "selectedOption": null
+  },
+  {
+    "id": "5",
+    "Question": "What does HIPAA stand for?",
+    "answer": "Health Insurance Portability and Accountability Act",
+    "options": [
+      "Health Information Privacy and Assurance Act",
+      "Healthcare Insurance Protection and Accountability Act",
+      "Health Information Processing and Access Act"
+    ],
+    "allowMultiple": false,
+    "instructions": "Select the correct full form.",
+    "selectedOption": null
+  },
+  {
+    "id": "6",
+    "Question": "What is the normal respiratory rate for a healthy adult?",
+    "answer": "12-20 breaths per minute",
+    "options": [
+      "8-16 breaths per minute",
+      "20-28 breaths per minute",
+      "10-18 breaths per minute"
+    ],
+    "allowMultiple": false,
+    "instructions": "Choose the correct range.",
+    "selectedOption": null
+  },
+  {
+    "id": "7",
+    "Question": "Which instrument is used to measure blood pressure?",
+    "answer": "Sphygmomanometer",
+    "options": ["Thermometer", "Stethoscope", "Pulse oximeter"],
+    "allowMultiple": false,
+    "instructions": "Select the correct instrument.",
+    "selectedOption": null
+  },
+  {
+    "id": "8",
+    "Question": "What is the primary purpose of hand hygiene in healthcare?",
+    "answer": "To prevent infection",
+    "options": [
+      "To improve skin condition",
+      "To meet regulations",
+      "To maintain personal hygiene"
+    ],
+    "allowMultiple": false,
+    "instructions": "Identify the main purpose.",
+    "selectedOption": null
+  },
+  {
+    "id": "9",
+    "Question": "What is the normal pH range of blood?",
+    "answer": "7.35-7.45",
+    "options": ["6.8-7.2", "7.0-7.2", "7.5-7.8"],
+    "allowMultiple": false,
+    "instructions": "Choose the correct pH range.",
+    "selectedOption": null
+  },
+  {
+    "id": "10",
+    "Question": "What is the primary function of red blood cells?",
+    "answer": "To carry oxygen",
+    "options": [
+      "To fight infection",
+      "To clot blood",
+      "To regulate temperature"
+    ],
+    "allowMultiple": false,
+    "instructions": "Select the main function.",
+    "selectedOption": null
+  },
+  {
+    "id": "11",
+    "Question": "What does BMI stand for?",
+    "answer": "Body Mass Index",
+    "options": [
+      "Basic Metabolic Indicator",
+      "Body Measurement Index",
+      "Biological Mass Index"
+    ],
+    "allowMultiple": false,
+    "instructions": "Identify the correct term.",
+    "selectedOption": null
+  },
+  {
+    "id": "12",
+    "Question": "Which condition is characterized by high blood sugar levels?",
+    "answer": "Diabetes",
+    "options": ["Hypertension", "Anemia", "Asthma"],
+    "allowMultiple": false,
+    "instructions": "Choose the correct condition.",
+    "selectedOption": null
+  },
+  {
+    "id": "13",
+    "Question": "What is the role of insulin in the body?",
+    "answer": "To regulate blood sugar",
+    "options": ["To fight infections", "To aid digestion", "To build muscle"],
+    "allowMultiple": false,
+    "instructions": "Select the correct role.",
+    "selectedOption": null
+  },
+  {
+    "id": "14",
+    "Question": "What is the main symptom of dehydration?",
+    "answer": "Thirst",
+    "options": ["Nausea", "Fever", "Cough"],
+    "allowMultiple": false,
+    "instructions": "Identify the primary symptom.",
+    "selectedOption": null
+  },
+  {
+    "id": "15",
+    "Question": "What is the normal body temperature in Celsius?",
+    "answer": "37°C",
+    "options": ["36°C", "38°C", "39°C"],
+    "allowMultiple": false,
+    "instructions": "Choose the correct value.",
+    "selectedOption": null
+  },
+  {
+    "id": "16",
+    "Question": "What does ECG stand for?",
+    "answer": "Electrocardiogram",
+    "options": [
+      "Electroencephalogram",
+      "Electroconvulsive Graph",
+      "Echocardiogram"
+    ],
+    "allowMultiple": false,
+    "instructions": "Select the correct term.",
+    "selectedOption": null
+  },
+  {
+    "id": "17",
+    "Question": "What is the main organ affected by hepatitis?",
+    "answer": "Liver",
+    "options": ["Kidney", "Heart", "Lungs"],
+    "allowMultiple": false,
+    "instructions": "Identify the affected organ.",
+    "selectedOption": null
+  },
+  {
+    "id": "18",
+    "Question": "What is the term for low levels of red blood cells?",
+    "answer": "Anemia",
+    "options": ["Leukopenia", "Thrombocytopenia", "Polycythemia"],
+    "allowMultiple": false,
+    "instructions": "Choose the correct condition.",
+    "selectedOption": null
+  },
+  {
+    "id": "19",
+    "Question": "What is the medical term for high blood pressure?",
+    "answer": "Hypertension",
+    "options": ["Hypotension", "Hyperlipidemia", "Hypoxemia"],
+    "allowMultiple": false,
+    "instructions": "Select the correct term.",
+    "selectedOption": null
+  },
+  {
+    "id": "20",
+    "Question": "Which nutrient is essential for blood clotting?",
+    "answer": "Vitamin K",
+    "options": ["Vitamin C", "Vitamin D", "Vitamin A"],
+    "allowMultiple": false,
+    "instructions": "Identify the essential nutrient.",
+    "selectedOption": null
+  }
 ]
