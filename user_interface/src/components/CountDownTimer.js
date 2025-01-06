@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
 function CountDownTimer({ endTime, onTimerEnd }) {
-    const [time, setTime] = useState(
-        Math.max(new Date(endTime).getTime() - Date.now(), 0)
-    );
+    const [time, setTime] = useState(0);
 
     useEffect(() => {
+        setTime(
+            Math.max(new Date(parseFloat(endTime)).getTime() - Date.now(), 0)
+        );
         setTimeout(() => {
             if (time <= 0) {
                 onTimerEnd();

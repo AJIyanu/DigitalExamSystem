@@ -39,16 +39,11 @@ export const getServerSideProps = (async () => {
     questionsObject: QuestionObject;
 }>;
 
-function TestPage({
-    questionsObject,
-}: {
-    questionsObject: InferGetServerSidePropsType<typeof getServerSideProps>;
-}): React.JSX.Element {
-    console.log(questionsObject);
+function TestPage({ ...questionsObject }): React.JSX.Element {
     return (
         <>
             <Header />
-            <QuestionPage questionsObject={questionsObject} />
+            <QuestionPage {...questionsObject} />
         </>
     );
 }

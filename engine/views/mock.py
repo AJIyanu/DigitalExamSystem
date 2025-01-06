@@ -1,6 +1,6 @@
 import random
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from uuid import uuid4
 from flask import request
 from flask import jsonify
@@ -21,16 +21,40 @@ def get_questions() -> jsonify:
                 "questionId": str(uuid4),
                 "allQuestions": questions,
                 "startTime": str(datetime.now),
-                "endTime": "0489450",
+                "endTime": str((datetime.now() + timedelta(hours=2)).timestamp() * 1000),
                 "subject": "Nursing",
                 "academicClass": "anonymous"
             }
+            print(response)
 
             return jsonify(response)
     except FileNotFoundError:
         return jsonify({"error": "questions.json not found"}), 404
     except json.JSONDecodeError:
         return jsonify({"error": "Error decoding questions.json"}), 500
+    
+@app_views.route('/test/<subject>', methods=['GET'])
+def get_test_questions(subject) -> jsonify:
+    """
+    check user examhistory for a recent exams
+    or redirect to fetch question
+    """
+    test_info = request.get_json()
+    user_id = test_info.get('userId')
+    try:
+        with open("examhistory.js", '+a') as file:
+            file.seek(0)
+            try:
+                user_history = json.load(file)
+            except json.JSONDecodeError:
+                user_history = []
+            for user in user_history:
+                now = datetime.now()
+                if datetime.fromtimestamp(user.get('endTime', 0) < now):
+                    return jsonify(user)
+            
+    except Exception:
+        return jsonify({"message": "an error occured!"})
 
 
 @app_views.route('/scheduledexams', methods=['GET'])

@@ -41,7 +41,6 @@ interface ExamProps {
 
 const Exam: React.FC<ExamProps> = ({ allQuestions, endTime, submit }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
-    console.log('exam component', allQuestions);
 
     function handleNextButton() {
         if (questionNumber >= allQuestions.length - 1) {
@@ -119,9 +118,7 @@ const Exam: React.FC<ExamProps> = ({ allQuestions, endTime, submit }) => {
     );
 };
 
-function QuestionPage(
-    questionObject: InferGetServerSidePropsType<typeof getServerSideProps>
-) {
+function QuestionPage({ ...questionObject }): React.JSX.Element {
     let submissionRetry = 0;
 
     async function handleSubmit() {
@@ -145,8 +142,6 @@ function QuestionPage(
         }
     }
 
-    console.log(questionObject.questionsObject.allQuestions);
-
     return (
         <div>
             <UserInfo />
@@ -154,7 +149,7 @@ function QuestionPage(
             <Exam
                 submit={handleSubmit}
                 allQuestions={questionObject.questionsObject.allQuestions}
-                endTime={questionObject.endTime}
+                endTime={questionObject.questionsObject.endTime}
             />
 
             <div className="d-grid mt-3">
