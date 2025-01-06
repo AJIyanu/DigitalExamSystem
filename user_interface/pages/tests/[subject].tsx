@@ -10,7 +10,7 @@ import React from 'react';
 export const getServerSideProps = (async () => {
     try {
         // console.log('Fetching questions...');
-        const res = await fetch('http://localhost:5000/api/v1/questions');
+        const res = await fetch('http://localhost:5000/api/v1/test/questions');
         if (!res.ok) {
             return {
                 redirect: {
@@ -20,7 +20,7 @@ export const getServerSideProps = (async () => {
             };
         }
         const questionsObject: QuestionObject = await res.json();
-        // console.log('Questions fetched successfully');
+        console.log(questionsObject);
         questionsObject.allQuestions.forEach((question) => {
             // console.log(question.options);
             shuffleOptions(question.options);

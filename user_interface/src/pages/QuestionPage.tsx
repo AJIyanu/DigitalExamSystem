@@ -1,5 +1,5 @@
 import { Stack, Button, Col, Row } from 'react-bootstrap';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Question from '../components/question';
 import Options from '../components/options';
@@ -120,8 +120,10 @@ const Exam: React.FC<ExamProps> = ({ allQuestions, endTime, submit }) => {
 
 function QuestionPage({ ...questionObject }): React.JSX.Element {
     let submissionRetry = 0;
+    const [disableButton, setDisableButton] = useState(false);
 
     async function handleSubmit() {
+        setDisableButton(true);
         try {
             const res = await fetch('http://localhost:5000/api/v1/submit');
             if (!res.ok) {
@@ -133,6 +135,7 @@ function QuestionPage({ ...questionObject }): React.JSX.Element {
 
                     alert(`Exam has not been submitted. Please contact technnician.\n
                         Exam will resubmit when internet connection has been restablished`);
+                    setDisableButton(false);
                 }
             }
             window.location.href = '/examshistory';
@@ -153,7 +156,11 @@ function QuestionPage({ ...questionObject }): React.JSX.Element {
             />
 
             <div className="d-grid mt-3">
-                <Button onClick={handleSubmit} variant="success">
+                <Button
+                    disabled={disableButton}
+                    onClick={handleSubmit}
+                    variant="success"
+                >
                     Submit
                 </Button>
             </div>

@@ -7,13 +7,13 @@ from flask import jsonify
 from views import app_views
 
 
-@app_views.route('/questions', methods=['GET'])
-def get_questions() -> jsonify:
+@app_views.route('/questions/<subj>', methods=['GET'])
+def get_questions(subj) -> jsonify:
     """
     Reads questions from questions.json and returns them as a JSON response.
     """
     try:
-        with open('questions.json', 'r') as f:
+        with open(f'{subj}.json', 'r') as f:
             questions = json.load(f)
             for question in questions:
                 question['options'].append(question['answer'])
@@ -26,7 +26,6 @@ def get_questions() -> jsonify:
                 "academicClass": "anonymous"
             }
             print(response)
-
             return jsonify(response)
     except FileNotFoundError:
         return jsonify({"error": "questions.json not found"}), 404
@@ -39,10 +38,9 @@ def get_test_questions(subject) -> jsonify:
     check user examhistory for a recent exams
     or redirect to fetch question
     """
-    test_info = request.get_json()
-    user_id = test_info.get('userId')
+    user_id = request.cookies.get('userId')
     try:
-        with open("examhistory.js", '+a') as file:
+        with open("examhistory.json", '+a') as file:
             file.seek(0)
             try:
                 user_history = json.load(file)
@@ -50,11 +48,21 @@ def get_test_questions(subject) -> jsonify:
                 user_history = []
             for user in user_history:
                 now = datetime.now()
-                if datetime.fromtimestamp(user.get('endTime', 0) < now):
-                    return jsonify(user)
-            
+                if user.get('userId') == user_id:
+                    if datetime.fromtimestamp(user.get('endTime', 0) < now):
+                        return jsonify(user)
+            user = {
+                "startTime": str(datetime.now().timestamp()),
+                "userId": user_id,
+            }
+            user_exam_data = user.update(json.loads(get_questions(subject)))
+            print(user_exam_data)
+            user_history.append(user_exam_data)
+            file.seek(0)
+            json.dump(user_history, file)
+            return jsonify(user_exam_data)
     except Exception:
-        return jsonify({"message": "an error occured!"})
+        return jsonify({"error": "an error occured!"}), 404
 
 
 @app_views.route('/scheduledexams', methods=['GET'])
