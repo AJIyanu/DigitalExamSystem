@@ -6,8 +6,8 @@ import Options from '../components/options';
 import CountDownTimer from '../components/CountDownTimer';
 import UserInfo from '../components/UserInfo';
 
-import type { InferGetServerSidePropsType } from 'next';
-import { getServerSideProps } from '../../pages/tests/[subject]';
+// import type { InferGetServerSidePropsType } from 'next';
+// import { getServerSideProps } from '../../pages/tests/[subject]';
 
 // Interface and Types
 
@@ -34,8 +34,6 @@ interface ExamProps {
     endTime: QuestionObject['endTime'];
     submit: () => void;
 }
-
-// Fectch Questions and Shuffle Options
 
 // Components
 
@@ -128,7 +126,7 @@ function QuestionPage({ ...questionObject }): React.JSX.Element {
             const res = await fetch('http://localhost:5000/api/v1/submit');
             if (!res.ok) {
                 submissionRetry = submissionRetry + 1;
-                if (submissionRetry < 30) {
+                if (submissionRetry < 3) {
                     throw new Error('Failed to submit');
                 } else {
                     //implement a logic to save answers and resubmit on reconnection.
@@ -141,7 +139,7 @@ function QuestionPage({ ...questionObject }): React.JSX.Element {
             window.location.href = '/examshistory';
         } catch (err) {
             console.error(err);
-            setTimeout(() => handleSubmit(), 10000);
+            setTimeout(() => handleSubmit(), 2000);
         }
     }
 

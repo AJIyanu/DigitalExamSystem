@@ -20,7 +20,7 @@ export const getServerSideProps = (async () => {
             };
         }
         const questionsObject: QuestionObject = await res.json();
-        console.log(questionsObject);
+        // console.log(questionsObject);
         questionsObject.allQuestions.forEach((question) => {
             // console.log(question.options);
             shuffleOptions(question.options);

@@ -1,10 +1,11 @@
 import random
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 from uuid import uuid4
 from flask import request
 from flask import jsonify
 from views import app_views
+from .logic import fetch_questions
 
 
 @app_views.route('/questions/<subj>', methods=['GET'])
@@ -12,25 +13,10 @@ def get_questions(subj) -> jsonify:
     """
     Reads questions from questions.json and returns them as a JSON response.
     """
-    try:
-        with open(f'{subj}.json', 'r') as f:
-            questions = json.load(f)
-            for question in questions:
-                question['options'].append(question['answer'])
-            response = {
-                "questionId": str(uuid4),
-                "allQuestions": questions,
-                "startTime": str(datetime.now),
-                "endTime": str((datetime.now() + timedelta(hours=2)).timestamp() * 1000),
-                "subject": "Nursing",
-                "academicClass": "anonymous"
-            }
-            print(response)
-            return jsonify(response)
-    except FileNotFoundError:
-        return jsonify({"error": "questions.json not found"}), 404
-    except json.JSONDecodeError:
-        return jsonify({"error": "Error decoding questions.json"}), 500
+    response = fetch_questions(subj)
+    if "error" in response:
+        return jsonify(response), 404
+    return jsonify(response)
     
 @app_views.route('/test/<subject>', methods=['GET'])
 def get_test_questions(subject) -> jsonify:
@@ -40,28 +26,38 @@ def get_test_questions(subject) -> jsonify:
     """
     user_id = request.cookies.get('userId')
     try:
-        with open("examhistory.json", '+a') as file:
-            file.seek(0)
+        with open("examhistory.json", 'r+') as file:
             try:
                 user_history = json.load(file)
-            except json.JSONDecodeError:
+            except json.JSONDecodeError as e:
+                print("error: ",e)
                 user_history = []
             for user in user_history:
                 now = datetime.now()
                 if user.get('userId') == user_id:
-                    if datetime.fromtimestamp(user.get('endTime', 0) < now):
+                    if datetime.fromtimestamp(float(user.get('endTime', 0)) / 1000) > now:
                         return jsonify(user)
             user = {
                 "startTime": str(datetime.now().timestamp()),
                 "userId": user_id,
             }
-            user_exam_data = user.update(json.loads(get_questions(subject)))
-            print(user_exam_data)
+            questions = fetch_questions(subject)
+            user_exam_data = {**user, **questions}
             user_history.append(user_exam_data)
             file.seek(0)
             json.dump(user_history, file)
             return jsonify(user_exam_data)
-    except Exception:
+    except FileNotFoundError:
+            with open('examhistory.json', 'w') as file:
+                user_history = {
+                "startTime": str(datetime.now().timestamp()),
+                "userId": user_id,
+                **fetch_questions(subject)
+            }
+                json.dump([user_history], file)
+                return jsonify(user_history)
+    except Exception as e:
+        print(e)
         return jsonify({"error": "an error occured!"}), 404
 
 

@@ -1,21 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
 function CountDownTimer({ endTime, onTimerEnd }) {
-    const [time, setTime] = useState(0);
+    const [time, setTime] = useState(1000);
+    const timerEnded = useRef(false);
 
     useEffect(() => {
-        setTime(
-            Math.max(new Date(parseFloat(endTime)).getTime() - Date.now(), 0)
-        );
-        setTimeout(() => {
-            if (time <= 0) {
+        const timeLeft = () => {
+            return Math.max(
+                new Date(parseFloat(endTime)).getTime() - Date.now(),
+                0
+            );
+        };
+
+        timerEnded.current = false;
+        setTime(timeLeft());
+
+        const countDown = setInterval(() => {
+            const remainingTime = timeLeft();
+            setTime(remainingTime);
+
+            if (remainingTime <= 0 && !timerEnded.current) {
+                timerEnded.current = true;
                 onTimerEnd();
-            } else {
-                setTime(time - 1000);
+                clearInterval(countDown);
             }
-        }, 1000);
-    }, [time, onTimerEnd]);
+        }, [1000]);
+
+        return () => {
+            clearInterval(countDown);
+        };
+    }, [endTime]);
 
     function formatTime(milliseconds) {
         const totalSeconds = Math.floor(milliseconds / 1000);
