@@ -1,7 +1,7 @@
 import Header from '../../src/components/Header';
 import QuestionPage from '../../src/pages/QuestionPage';
 
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetServerSideProps } from 'next';
 import type { QuestionObject } from '../../src/pages/QuestionPage';
 import { shuffleOptions } from '../../src/pages/QuestionPage';
 
