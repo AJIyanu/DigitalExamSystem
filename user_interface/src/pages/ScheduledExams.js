@@ -44,8 +44,6 @@ function ScheduledExams() {
 }
 
 function SubjectCard({ name, instruction, duration, img }) {
-    const { userId } = useParams();
-
     return (
         <Card>
             <Card.Img
@@ -78,11 +76,7 @@ function SubjectCard({ name, instruction, duration, img }) {
                 </Card.Body>
             </Card.Body>
             <Card.Footer className="d-grid">
-                <Button
-                    xs={6}
-                    as="a"
-                    href={`/dashboard/${userId}/questions/${name.replace(/\s+/g, '')}`}
-                >
+                <Button xs={6} as="a" href={`/tests/${name}`}>
                     Start
                 </Button>
             </Card.Footer>

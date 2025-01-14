@@ -11,6 +11,7 @@ function UserInfo() {
     });
 
     useEffect(() => {
+        const userId = getCookie('userId');
         fetchUserDetails(`http://localhost:5000/api/v1/users/${userId}`).then(
             (res) => {
                 setUserInfo(res);
@@ -48,5 +49,11 @@ async function fetchUserDetails(url) {
 
     return userDetails;
 }
+
+const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+};
 
 export default UserInfo;

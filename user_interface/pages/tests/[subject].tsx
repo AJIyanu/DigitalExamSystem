@@ -7,10 +7,16 @@ import { shuffleOptions } from '../../src/pages/QuestionPage';
 
 import React from 'react';
 
-export const getServerSideProps = (async () => {
+export const getServerSideProps = (async (context) => {
+    const userId = context.req.cookies.userId;
+
     try {
         // console.log('Fetching questions...');
-        const res = await fetch('http://localhost:5000/api/v1/test/questions');
+        const res = await fetch('http://localhost:5000/api/v1/test/questions', {
+            headers: {
+                Cookie: `userId=${userId}`,
+            },
+        });
         if (!res.ok) {
             return {
                 redirect: {

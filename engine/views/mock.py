@@ -6,6 +6,7 @@ from flask import request
 from flask import jsonify
 from views import app_views
 from .logic import fetch_questions
+from .logic import calc_score
 
 
 @app_views.route('/questions/<subj>', methods=['GET'])
@@ -168,3 +169,30 @@ def get_update_user(id):
             return jsonify({'error': 'users.json not found'}), 404
         except json.JSONDecodeError:
             return jsonify({'error': 'file decode error'}), 500
+
+@app_views.route('/examhistory', methods=['GET'])
+def get_exam_history_data():
+    """returns json data of exam history using cookie"""
+    user_id = request.cookies.get('userId')
+    print(f'user Id found in the cookie {user_id}')
+    with open('examhistory.json', 'r') as file:
+        all_exam_history_data = json.load(file)
+        user_exam_history = []
+        for exam in all_exam_history_data:
+            if exam.get("userId") == user_id:
+                current_exam_data = {}
+                current_exam_data.update(subject=exam.get('subject', 'Subject'))
+                current_exam_data.update(id=exam.get('questionId', 'id not found'))
+                start_time = datetime.fromtimestamp(float(exam.get('startTime')))
+                exam_day = start_time.strftime("%d")
+                exam_day = exam_day.replace("01", "1st").replace("02", "2nd").replace("03", "3rd")
+                if exam_day.startswith('0'):
+                    exam_day = exam_day[1:]
+                if not exam_day.endswith(('st', 'nd', 'rd')):
+                    exam_day += "th"
+                current_exam_data.update(date=f'{start_time.strftime(f'%B {exam_day}, %Y')} ')
+                current_exam_data.update(timeStarted=start_time.strftime('%H:%M'))
+                current_exam_data.update(timeEnded=datetime.fromtimestamp(float(exam.get('endTime', 0)) / 1000).strftime('%H:%M'))
+                current_exam_data.update(score=calc_score(exam.get('allQuestions', [])))
+                user_exam_history.append(current_exam_data)
+        return jsonify(user_exam_history), 200

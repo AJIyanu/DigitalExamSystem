@@ -1,4 +1,5 @@
 import { useState } from 'react';
+// import { cookies } from 'next/headers';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { fetchUserByUsername } from './SignUpForm';
 
@@ -22,6 +23,7 @@ function SignInForm({ onFormChange }) {
         e.preventDefault();
         setIsLoading(true);
         const conflict = await fetchUserByUsername(formData.userName);
+        console.log(conflict);
         if (!conflict) {
             setIsLoading(false);
             setAlertText('Oops! Username does not exist');
@@ -30,7 +32,13 @@ function SignInForm({ onFormChange }) {
             setAlertText(`Oops! Your lastname is your password`);
         } else {
             setIsLoading(false);
-            window.location.href = '/dashboard/' + conflict.userName;
+            const setCookie = (userId) => {
+                const isProduction =
+                    process.env.NEXT_PUBLIC_NODE_ENV === 'production';
+                document.cookie = `userId=${userId}; path=/; samesite=strict${isProduction ? '; secure' : ''}`;
+            };
+            setCookie(conflict.userId);
+            window.location.href = '/dashboard';
         }
     }
 

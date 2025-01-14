@@ -25,3 +25,15 @@ def fetch_questions(subj):
         return {"error": "questions.json not found"}
     except json.JSONDecodeError:
         return {"error": "Error decoding questions.json"}
+    
+
+def calc_score(exam_data=[]):
+    """returns the scrore from exam data"""
+    score = 0
+    for question in exam_data:
+        try:
+            if question['selectedOption'] == question['answer']:
+                score += 1
+        except Exception:
+            pass
+    return f"{str(score)} of {len(exam_data)}"

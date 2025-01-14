@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { useEffect } from 'react';
+
 import Header from '../../src/components/Header';
 import UserInfo from '../../src/components/UserInfo';
-import { GetServerSideProps } from 'next';
-import { Button } from 'react-bootstrap';
 
 interface TableData {
     id: number;
@@ -27,25 +28,37 @@ const data: TableData[] = [
     { id: 4, name: 'Emily Davis', age: 28, email: 'emily.davis@example.com' },
 ];
 
-export const getServerSideProps = (async () => {
-    try {
-        const data = await fetch('');
-        if (!data.ok) throw new Error('Exam History Request didnt go through');
-        const jsondata = data.json();
-        return { props: { jsondata } };
-    } catch (err) {
-        console.error(err);
-    }
-}) satisfies GetServerSideProps<{
-    examHistoryDataArray: ExamHistoryData[];
-}>;
-
 const ExamHistory: React.FC = () => {
+    const [examHistoryData, setExamHistoryData] = useState<ExamHistoryData[]>(
+        []
+    );
+
+    useEffect(() => {
+        const fetchExamHistoryData = async () => {
+            try {
+                const data = await fetch(
+                    'http://127.0.0.1:5000/api/v1/examhistory',
+                    {
+                        credentials: 'include',
+                    }
+                );
+                if (!data.ok)
+                    throw new Error('Exam History Request didnt go through');
+                const jsondata: ExamHistoryData[] = await data.json();
+                console.log(jsondata);
+                setExamHistoryData(jsondata);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchExamHistoryData();
+    }, []);
+
     const tableRowTailwind =
-        'px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider';
+        'px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider';
     return (
-        <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-blue-500 table-auto">
+        <div className={examHistoryData.length > 0 ? 'overflow-x-auto' : ''}>
+            <table className="min-w-full divide-y divide-black table-auto">
                 <thead className="bg-red-500">
                     <tr>
                         <th scope="col" className={tableRowTailwind}>
@@ -72,25 +85,25 @@ const ExamHistory: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {data.map((item) => (
+                    {examHistoryData.map((item, idx) => (
                         <tr key={item.id}>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {item.id}
+                                {idx + 1}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                {item.name}
+                                {item.date}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {item.age}
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                {item.subject}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {item.email}
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                {item.timeStarted}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {item.email}
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                {item.timeEnded}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {item.email}
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-black">
+                                {item.score}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <Button variant="outline-success" href="#">
@@ -113,7 +126,7 @@ const ExamHistoryPage: React.FC = () => {
             <hr />
             <div className="d-flex flex-column align-items-center">
                 <ExamHistory />
-                <h1>Your Exam history is here!</h1>
+                {/* <h1>Your Exam history is here!</h1> */}
             </div>
         </div>
     );
