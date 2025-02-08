@@ -18,7 +18,10 @@ app.config['SECRET_KEY'] = 'mysecretkey'
 # app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=2)
 # app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=2)
 # app.config['JWT_SECRET_KEY'] = 'secretekesys'
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, resources={
+    r"/api/*": {"origins": "http://localhost:3000"}
+    },
+    supports_credentials=True)
 # jwt = JWTManager(app)
 
 

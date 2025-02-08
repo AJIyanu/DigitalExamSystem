@@ -11,7 +11,7 @@ def fetch_questions(subj):
                 question['options'].append(question['answer'])
             questions_id = str(uuid4())
             start_time = str(datetime.now().timestamp())
-            end_time = str((datetime.now() + timedelta(minutes=1)).timestamp() * 1000)
+            end_time = str((datetime.now() + timedelta(minutes=10)).timestamp() * 1000)
             response = {
                 "questionId": questions_id,
                 "allQuestions": questions,

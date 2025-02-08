@@ -1,5 +1,7 @@
 import { Stack, Button, Col, Row } from 'react-bootstrap';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Toast } from 'react-bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Question from '../components/question';
 import Options from '../components/options';
@@ -33,11 +35,17 @@ interface ExamProps {
     allQuestions: AllQuestion[];
     endTime: QuestionObject['endTime'];
     submit: () => void;
+    disableButton: boolean;
 }
 
 // Components
 
-const Exam: React.FC<ExamProps> = ({ allQuestions, endTime, submit }) => {
+const Exam: React.FC<ExamProps> = ({
+    allQuestions,
+    endTime,
+    submit,
+    disableButton,
+}) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
 
     function handleNextButton() {
@@ -94,6 +102,7 @@ const Exam: React.FC<ExamProps> = ({ allQuestions, endTime, submit }) => {
                                 <Button
                                     onClick={handlePrevButton}
                                     variant="warning"
+                                    disabled={disableButton}
                                 >
                                     Prev
                                 </Button>
@@ -104,6 +113,7 @@ const Exam: React.FC<ExamProps> = ({ allQuestions, endTime, submit }) => {
                                 <Button
                                     onClick={handleNextButton}
                                     variant="info"
+                                    disabled={disableButton}
                                 >
                                     Next
                                 </Button>
@@ -119,6 +129,8 @@ const Exam: React.FC<ExamProps> = ({ allQuestions, endTime, submit }) => {
 function QuestionPage({ ...questionObject }): React.JSX.Element {
     let submissionRetry = 0;
     const [disableButton, setDisableButton] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [showToast, setShowToast] = useState(false);
 
     async function handleSubmit() {
         setDisableButton(true);
@@ -136,21 +148,71 @@ function QuestionPage({ ...questionObject }): React.JSX.Element {
                     setDisableButton(false);
                 }
             }
-            window.location.href = '/examshistory';
+            window.location.href = '/dashboard/examshistory';
         } catch (err) {
             console.error(err);
             setTimeout(() => handleSubmit(), 2000);
         }
     }
 
+    useEffect(() => {
+        console.log('running');
+        const fectchInternetTime = async () => {
+            try {
+                const data = await fetch(
+                    'http://localhost:5000/api/v1/ping/ping'
+                );
+                // console.log(data);
+                const resp = await data.json();
+                console.log(resp);
+                if (resp.msg === 'pong') {
+                    setDisableButton(false);
+                    if (showToast) {
+                        setToastMessage('Internet Connection Restablished');
+                    }
+                } else {
+                    setDisableButton(true);
+                    setShowToast(true);
+                    setToastMessage('No Internet Connection');
+                }
+            } catch (err) {
+                console.error(err);
+                setDisableButton(true);
+                setShowToast(true);
+                setToastMessage('No Internet Connection');
+            }
+        };
+        const check = setInterval(() => {
+            console.log('checking connectivity');
+            fectchInternetTime();
+        }, 5000);
+
+        return () => {
+            clearInterval(check);
+        };
+    }, []);
+
     return (
         <div>
             <UserInfo />
+            <Toast
+                show={showToast}
+                onClose={() => setShowToast(false)}
+                delay={20000}
+                autohide
+                className="position-fixed top-3 end-3"
+            >
+                <Toast.Header className="bg-danger text-white">
+                    {disableButton ? 'An Error Occured!' : 'Error Rectified'}
+                </Toast.Header>
+                <Toast.Body>{toastMessage}</Toast.Body>
+            </Toast>
             <hr />
             <Exam
                 submit={handleSubmit}
                 allQuestions={questionObject.questionsObject.allQuestions}
                 endTime={questionObject.questionsObject.endTime}
+                disableButton={disableButton}
             />
 
             <div className="d-grid mt-3">

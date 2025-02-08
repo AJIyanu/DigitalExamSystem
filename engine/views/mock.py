@@ -170,11 +170,9 @@ def get_update_user(id):
         except json.JSONDecodeError:
             return jsonify({'error': 'file decode error'}), 500
 
-@app_views.route('/examhistory', methods=['GET'])
-def get_exam_history_data():
+@app_views.route('/examhistory/<user_id>', methods=['GET'])
+def get_exam_history_data(user_id=None):
     """returns json data of exam history using cookie"""
-    user_id = request.cookies.get('userId')
-    print(f'user Id found in the cookie {user_id}')
     with open('examhistory.json', 'r') as file:
         all_exam_history_data = json.load(file)
         user_exam_history = []
@@ -196,3 +194,10 @@ def get_exam_history_data():
                 current_exam_data.update(score=calc_score(exam.get('allQuestions', [])))
                 user_exam_history.append(current_exam_data)
         return jsonify(user_exam_history), 200
+
+@app_views.route('/ping/<info>', methods=['GET'])
+def ping_server(info=None):
+    """checks server connection"""
+    if info == "servertime":
+        return jsonify(msg=datetime.now().timestamp())
+    return jsonify({"msg":"pong"}), 200

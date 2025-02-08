@@ -2,8 +2,31 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 
-import Header from '../../src/components/Header';
-import UserInfo from '../../src/components/UserInfo';
+import UserInfo from '../../../src/components/UserInfo';
+import { getCookie } from '../../../src/components/UserInfo';
+
+import DashboardLayout from '../../../src/components/DashboadLayout';
+
+import type { NextPageWithLayout } from '../../_app';
+import type { ReactElement } from 'react';
+
+const ExamsHistoryPage: NextPageWithLayout = () => {
+    return (
+        <div>
+            <UserInfo />
+            <hr />
+            <div className="d-flex flex-column align-items-center">
+                <ExamHistory />
+                {/* <h1>Your Exam history is here!</h1> */}
+            </div>
+        </div>
+    );
+};
+
+ExamsHistoryPage.getLayout = function getLayout(page: ReactElement) {
+    return <DashboardLayout>{page}</DashboardLayout>;
+};
+// export default ExamsHistoryPage;
 
 interface TableData {
     id: number;
@@ -37,10 +60,7 @@ const ExamHistory: React.FC = () => {
         const fetchExamHistoryData = async () => {
             try {
                 const data = await fetch(
-                    'http://127.0.0.1:5000/api/v1/examhistory',
-                    {
-                        credentials: 'include',
-                    }
+                    `http://127.0.0.1:5000/api/v1/examhistory/${getCookie('userId')}`
                 );
                 if (!data.ok)
                     throw new Error('Exam History Request didnt go through');
@@ -118,18 +138,4 @@ const ExamHistory: React.FC = () => {
     );
 };
 
-const ExamHistoryPage: React.FC = () => {
-    return (
-        <div>
-            <Header />
-            <UserInfo />
-            <hr />
-            <div className="d-flex flex-column align-items-center">
-                <ExamHistory />
-                {/* <h1>Your Exam history is here!</h1> */}
-            </div>
-        </div>
-    );
-};
-
-export default ExamHistoryPage;
+export default ExamsHistoryPage;
