@@ -202,7 +202,13 @@ function QuestionPage({ ...questionObject }): React.JSX.Element {
                 autohide
                 className="position-fixed top-3 end-3"
             >
-                <Toast.Header className="bg-danger text-white">
+                <Toast.Header
+                    className={
+                        disableButton
+                            ? 'bg-danger text-white'
+                            : 'bg-success text-white'
+                    }
+                >
                     {disableButton ? 'An Error Occured!' : 'Error Rectified'}
                 </Toast.Header>
                 <Toast.Body>{toastMessage}</Toast.Body>
