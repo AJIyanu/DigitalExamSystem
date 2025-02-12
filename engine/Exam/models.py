@@ -14,9 +14,10 @@ class Subject(models.Model):
     subject_description = models.CharField(max_length=50)
     total_number_of_students = models.IntegerField(default=0)
     teacher = models.ForeignKey("AdminStaff.Teacher", on_delete=models.CASCADE)
+    level = models.ForeignKey("Students.Level", on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.subject
+        return f"{self.subject}, {self.level}"
 
 class SubjectScoreSheet(models.Model):
     """this class describes the score sheet definition for each subject"""

@@ -1,5 +1,8 @@
 from django.db import models
 from uuid import uuid4
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 # from Exam.models import Subject
 from django.conf import settings
 
@@ -8,7 +11,7 @@ class Student(models.Model):
     id = models.CharField(
     primary_key=True,
     max_length=36,
-    default=str(uuid4),
+    default=str(uuid4()),
     editable=False
     )
     last_name = models.CharField(max_length=50)
@@ -18,12 +21,15 @@ class Student(models.Model):
     admission_number = models.CharField(max_length=10, unique=True)
     sex = models.CharField(max_length=6, choices=[("Male", "Male"), ("Female", "Female")])
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    current_level = models.ForeignKey("Level", on_delete=models.SET_NULL, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        if not self.user:
-            user = settings.AUTH_USER_MODEL.objects.create(
+        try:
+            student_auth = self.user
+        except ObjectDoesNotExist:
+            user = get_user_model().objects.create(
                 username=self.admission_number,
-                password=self.last_name.lower()
+                password=make_password(self.last_name.lower())
                 )
             user.save()
             self.user = user

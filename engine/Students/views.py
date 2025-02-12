@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -27,13 +27,14 @@ class student_login(APIView):
                 access_token['firstName'] = user.student.first_name
                 access_token['lastName'] = user.student.last_name
                 access_token['middleName'] = user.student.middle_name
-                access_token['studentId'] = user.student.id
+                access_token['studentId'] = str(user.student.id)
                 access_token['admissionNumber'] = user.student.admission_number
+
+                response = JsonResponse({"msg": "Login successful!"})
+                response.set_cookie(key='access_token', value=str(access_token), httponly=True)
+                response.set_cookie(key='refresh_token', value=str(refresh), httponly=True)
                 
-                return Response({"msg": "Login successful!",
-                                 "access_token": str(access_token),
-                                 "refresh_token": str(refresh)},
-                                 status=200)
+                return response
             return Response({"msg": "invalid credentials or you are not a student!"}, status=401)
         return Response({"msg": "invalid user type!"}, status=401)
 

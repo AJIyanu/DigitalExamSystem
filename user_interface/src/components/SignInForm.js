@@ -22,23 +22,32 @@ function SignInForm({ onFormChange }) {
     async function handleSubmitForm(e) {
         e.preventDefault();
         setIsLoading(true);
-        const conflict = await fetchUserByUsername(formData.userName);
-        console.log(conflict);
-        if (!conflict) {
+        formData.userType = 'student';
+        const data = await fetch(
+            'http://localhost:8000/students/api/studentlogin/',
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            }
+        );
+
+        const response = await data.json();
+        if (response.msg === 'Login successful!') {
+            // window.location.href = '/dashboard';
+            let userdata = await fetch('/api/auth/token', {
+                method: 'GET',
+                credentials: 'include',
+            });
+            userdata = await userdata.json();
+            console.log(userdata);
             setIsLoading(false);
-            setAlertText('Oops! Username does not exist');
-        } else if (conflict.lastName !== formData.password) {
-            setIsLoading(false);
-            setAlertText(`Oops! Your lastname is your password`);
         } else {
+            setAlertText(response.msg);
             setIsLoading(false);
-            const setCookie = (userId) => {
-                const isProduction =
-                    process.env.NEXT_PUBLIC_NODE_ENV === 'production';
-                document.cookie = `userId=${userId}; path=/; samesite=strict${isProduction ? '; secure' : ''}`;
-            };
-            setCookie(conflict.userId);
-            window.location.href = '/dashboard';
         }
     }
 
