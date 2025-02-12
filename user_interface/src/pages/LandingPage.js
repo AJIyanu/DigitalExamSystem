@@ -43,11 +43,19 @@ function LandingPage() {
                     </p>
                 </Col>
                 <Col className={`d-flex ${vertHorCntr} white-bg`}>
-                    <h2 className="mb-5">Digital Exam System</h2>
+                    <h2 className="mb-1">Digital Exam System</h2>
                     {signup ? (
-                        <SignUpForm onFormChange={handleSigningFormChange} />
+                        <SignInForm
+                            onFormChange={handleSigningFormChange}
+                            formUserType="student"
+                            formTitle="Student Login"
+                        />
                     ) : (
-                        <SignInForm onFormChange={handleSigningFormChange} />
+                        <SignInForm
+                            onFormChange={handleSigningFormChange}
+                            formTitle="Staff Login"
+                            formUserType="staff"
+                        />
                     )}
                 </Col>
             </Row>

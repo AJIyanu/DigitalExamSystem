@@ -1,9 +1,8 @@
 import { useState } from 'react';
 // import { cookies } from 'next/headers';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { fetchUserByUsername } from './SignUpForm';
 
-function SignInForm({ onFormChange }) {
+function SignInForm({ onFormChange, formTitle, formUserType }) {
     const [formData, setFormData] = useState({
         userName: '',
         password: '',
@@ -22,9 +21,9 @@ function SignInForm({ onFormChange }) {
     async function handleSubmitForm(e) {
         e.preventDefault();
         setIsLoading(true);
-        formData.userType = 'student';
+        formData.userType = formUserType;
         const data = await fetch(
-            'http://localhost:8000/students/api/studentlogin/',
+            `http://localhost:8000/api/${formUserType}s/login/`,
             {
                 method: 'POST',
                 credentials: 'include',
@@ -53,6 +52,10 @@ function SignInForm({ onFormChange }) {
 
     return (
         <Form>
+            <hr className="border-t-5 border-black-400 mb-4" />
+            <div className="text-center text-2xl font-medium mb-4">
+                {formTitle}
+            </div>
             {alertText ? (
                 <div
                     className="alert alert-danger text-align-center"
@@ -64,11 +67,20 @@ function SignInForm({ onFormChange }) {
                 <></>
             )}
             <Form.Group className="mb-3" controlId="username" as={Row}>
-                <Form.Label>Username</Form.Label>
+                <Form.Label>
+                    {formUserType === 'student'
+                        ? 'Admission Number'
+                        : 'Username'}
+                </Form.Label>
                 <Col md={12}>
                     <Form.Control
                         type="text"
-                        placeholder="Your unique username"
+                        placeholder={
+                            formTitle === 'student'
+                                ? 'Admission Number'
+                                : 'Username'
+                        }
+                        required
                         name="userName"
                         value={formData.userName}
                         onChange={handleInputChange}
@@ -86,7 +98,9 @@ function SignInForm({ onFormChange }) {
                         onChange={handleInputChange}
                     />
                     <Form.Text className="text-success">
-                        Your Password is your Lastname
+                        {formUserType === 'student'
+                            ? 'Your Password is your Lastname in lowercase'
+                            : ''}
                     </Form.Text>
                 </Col>
             </Form.Group>
@@ -111,7 +125,7 @@ function SignInForm({ onFormChange }) {
             <hr />
             <Form.Group as={Row} className="mt-4">
                 <Form.Label className="text-danger" column>
-                    First time here?
+                    {`Not a ${formUserType}?`}
                 </Form.Label>
                 <Col xs={7}>
                     <div className="d-grid">
@@ -121,7 +135,7 @@ function SignInForm({ onFormChange }) {
                             className="me-0"
                             onClick={() => onFormChange()}
                         >
-                            Let's Walk You in!
+                            {`Switch to ${formUserType === 'student' ? 'Staff' : 'Student'}`}
                         </Button>
                     </div>
                 </Col>
