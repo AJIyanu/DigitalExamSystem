@@ -5,3 +5,4 @@ __init__.py
 __init__*
 */__init__*
 *.pyc
+*/migrations/*
