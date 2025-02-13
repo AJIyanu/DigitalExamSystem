@@ -12,8 +12,18 @@ type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout;
 };
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
     const getLayout = Component.getLayout || ((page) => page);
+
+    const isDashboardRoute = router.pathname.startsWith('/dashboard');
+
+    if (isDashboardRoute) {
+        return (
+            <DashboardLayout>
+                <Component {...pageProps} />
+            </DashboardLayout>
+        );
+    }
     // console.log(getLayout);
 
     return getLayout(<Component {...pageProps} />);

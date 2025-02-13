@@ -2,14 +2,8 @@
 const nextConfig = {
     reactStrictMode: true,
     async redirects() {
-        return [
-            {
-                source: '/dashboard',
-                destination: '/dashboard/scheduledexams',
-                permanent: false,
-            },
-        ];
+        return [];
     },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
