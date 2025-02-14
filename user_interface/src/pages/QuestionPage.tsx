@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Question from '../components/question';
 import Options from '../components/options';
 import CountDownTimer from '../components/CountDownTimer';
-import UserInfo from '../components/UserInfo';
+import UserInfo from '../../pages/api/auth/UserInfo';
 
 // import type { InferGetServerSidePropsType } from 'next';
 // import { getServerSideProps } from '../../pages/tests/[subject]';

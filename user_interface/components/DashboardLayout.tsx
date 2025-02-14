@@ -8,8 +8,9 @@ import {
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { ReactNode } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ReactNode, header } from 'react';
+import UserInfo from '@/pages/api/auth/UserInfo';
 
 type Props = {
     children: ReactNode;
@@ -27,39 +28,30 @@ export default function DashboardLayout({ children }: Props) {
                             orientation="vertical"
                             className="mr-2 h-4"
                         /> */}
-                        <Breadcrumb>
-                            <BreadcrumbList>
-                                <BreadcrumbItem className="hidden md:block">
-                                    <BreadcrumbLink href="#">
-                                        Dashboard
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden md:block" />
-                                <BreadcrumbItem>
-                                    <BreadcrumbPage>
-                                        Data Fetching
-                                    </BreadcrumbPage>
-                                </BreadcrumbItem>
-                            </BreadcrumbList>
-                        </Breadcrumb>
                     </div>
+                    <UserInfo />
                     <div className="ml-auto me-5">
                         <Avatar>
                             <AvatarImage
                                 src="https://github.com/shadcn.png"
                                 alt="User avatar"
                             />
+                            <AvatarFallback>AJ</AvatarFallback>
                         </Avatar>
                     </div>
                 </header>
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                    <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                        <div className="aspect-video rounded-xl bg-muted/50" />
-                        <div className="aspect-video rounded-xl bg-muted/50" />
-                        <div className="aspect-video rounded-xl bg-muted/50" />
-                    </div>
-                    <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-                </div>
+                <Breadcrumb className="mt-2">
+                    <BreadcrumbList>
+                        <BreadcrumbItem className="hidden md:block">
+                            <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator className="hidden md:block" />
+                        <BreadcrumbItem>
+                            <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                        </BreadcrumbItem>
+                    </BreadcrumbList>
+                </Breadcrumb>
+                <div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
             </SidebarInset>
         </SidebarProvider>
     );

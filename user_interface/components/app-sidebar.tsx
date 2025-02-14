@@ -29,7 +29,7 @@ const data = {
     navMain: [
         {
             title: 'Overview',
-            url: '#',
+            url: '/dashboard',
             icon: SquareTerminal,
         },
         {
@@ -40,7 +40,7 @@ const data = {
             items: [
                 {
                     title: 'Add Student',
-                    url: '#',
+                    url: '/dashboard/addstudent',
                 },
                 {
                     title: 'View Students',

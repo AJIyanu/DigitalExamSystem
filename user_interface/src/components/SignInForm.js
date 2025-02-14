@@ -22,30 +22,37 @@ function SignInForm({ onFormChange, formTitle, formUserType }) {
         e.preventDefault();
         setIsLoading(true);
         formData.userType = formUserType;
-        const data = await fetch(
-            `http://localhost:8000/api/${formUserType}s/login/`,
-            {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            }
-        );
+        try {
+            const data = await fetch(
+                `http://localhost:8000/api/${formUserType}s/login/`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                }
+            );
 
-        const response = await data.json();
-        if (response.msg === 'Login successful!') {
-            // window.location.href = '/dashboard';
-            let userdata = await fetch('/api/auth/token', {
-                method: 'GET',
-                credentials: 'include',
-            });
-            userdata = await userdata.json();
-            console.log(userdata);
-            setIsLoading(false);
-        } else {
-            setAlertText(response.msg);
+            if (!data.ok) {
+                setAlertText('Login failed. Please try again.');
+                setIsLoading(false);
+                return;
+            }
+
+            const response = await data.json();
+            if (response.msg === 'Login successful!') {
+                window.location.href = '/dashboard';
+
+                setIsLoading(false);
+            } else {
+                setAlertText(response.msg);
+                setIsLoading(false);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setAlertText('An error occurred. Please try again later.');
             setIsLoading(false);
         }
     }
