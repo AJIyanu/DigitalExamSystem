@@ -22,6 +22,7 @@ class Student(models.Model):
     sex = models.CharField(max_length=6, choices=[("Male", "Male"), ("Female", "Female")])
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     current_level = models.ForeignKey("Level", on_delete=models.SET_NULL, null=True, blank=True)
+    exam_number = models.CharField(max_length=10, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         try:
@@ -85,4 +86,7 @@ class Scoresheet(models.Model):
     def __str__(self):
         return f"{self.student.admission_number} {self.subject} {self.level} {self.year} {self.total}"
 
-
+class AdmissionTracker(models.Model):
+    """This keeps track of admissions per year"""
+    year = models.IntegerField(default=2025, unique=True)
+    count = models.IntegerField(default=0)

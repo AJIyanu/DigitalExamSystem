@@ -7,8 +7,10 @@ import { z } from 'zod';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Toaster } from '@/components/ui/toaster';
+
 import { Calendar } from '@/components/ui/calendar';
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-datepicker';
 
 import {
     Popover,
@@ -33,6 +35,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
 
 const FormSchema = z.object({
     lastName: z.string({
@@ -68,7 +71,33 @@ function InputForm() {
         },
     });
 
-    function onSubmit(data: z.infer<typeof FormSchema>) {}
+    const { toast } = useToast();
+
+    async function onSubmit(data: z.infer<typeof FormSchema>) {
+        try {
+            const response = await fetch(
+                'http://localhost:8000/api/students/new/',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                }
+            );
+
+            const result = await response.json();
+            console.log(result.msg);
+            toast({
+                description: result.msg,
+            });
+        } catch (error) {
+            console.error(error);
+            toast({
+                description: 'An error occurred',
+            });
+        }
+    }
 
     return (
         <Form {...form}>
@@ -214,6 +243,7 @@ export default function Page() {
             <h1 className="text-3xl font-semibold">Add a Student</h1>
             <hr />
             <InputForm />
+            <Toaster />
         </div>
     );
 }
