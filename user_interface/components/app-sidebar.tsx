@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
     GraduationCap,
-    BookOpen,
     Users,
     SquarePen,
     Settings2,
@@ -44,7 +43,7 @@ const data = {
                 },
                 {
                     title: 'View Students',
-                    url: '#',
+                    url: '/dashboard/viewstudents',
                 },
             ],
         },
@@ -129,6 +128,10 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    // make this function async
+    // fecth usertype from nextjs api
+    // update menu data based on usertype
+
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>

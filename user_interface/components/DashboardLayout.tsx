@@ -10,6 +10,7 @@ import {
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ReactNode, header } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 import UserInfo from '@/pages/api/auth/UserInfo';
 
 type Props = {
@@ -52,6 +53,7 @@ export default function DashboardLayout({ children }: Props) {
                     </BreadcrumbList>
                 </Breadcrumb>
                 <div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
+                <Toaster />
             </SidebarInset>
         </SidebarProvider>
     );

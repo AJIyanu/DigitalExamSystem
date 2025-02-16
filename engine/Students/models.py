@@ -90,3 +90,6 @@ class AdmissionTracker(models.Model):
     """This keeps track of admissions per year"""
     year = models.IntegerField(default=2025, unique=True)
     count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Current Year: {self.year}, latest: {self.count}"

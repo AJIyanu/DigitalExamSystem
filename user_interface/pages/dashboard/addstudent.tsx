@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Toaster } from '@/components/ui/toaster';
+// import { Toaster } from '@/components/ui/toaster';
 
 import { Calendar } from '@/components/ui/calendar';
 // import DatePicker from 'react-datepicker';
@@ -91,10 +91,12 @@ function InputForm() {
             toast({
                 description: result.msg,
             });
+            window.location.reload();
         } catch (error) {
             console.error(error);
             toast({
                 description: 'An error occurred',
+                variant: 'success',
             });
         }
     }
@@ -243,7 +245,7 @@ export default function Page() {
             <h1 className="text-3xl font-semibold">Add a Student</h1>
             <hr />
             <InputForm />
-            <Toaster />
+            {/* <Toaster /> */}
         </div>
     );
 }
